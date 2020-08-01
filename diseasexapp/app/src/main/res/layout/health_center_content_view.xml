@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/health_center_name_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="Health Center Name"
+        android:textSize="20sp"
+        android:layout_margin="8dp"/>
+
+    <TextView
+        android:id="@+id/address_content_label"
+        app:layout_constraintTop_toBottomOf="@id/health_center_name_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Address: "
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:textSize="16sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/address_content_tv"
+        app:layout_constraintTop_toBottomOf="@id/health_center_name_content"
+        app:layout_constraintLeft_toRightOf="@id/address_content_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Address"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/incharge_content_label"
+        app:layout_constraintTop_toBottomOf="@id/address_content_label"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Center Incharge: "
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:textSize="16sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/incharge_content_tv"
+        app:layout_constraintTop_toBottomOf="@id/address_content_tv"
+        app:layout_constraintLeft_toRightOf="@id/incharge_content_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Incharge Name"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/affected_content_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/incharge_content_label"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/deaths_content_label"
+        android:text="Cases"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:layout_margin="8dp"/>
+
+    <TextView
+        android:id="@+id/deaths_content_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/incharge_content_label"
+        app:layout_constraintLeft_toRightOf="@id/affected_content_label"
+        app:layout_constraintRight_toLeftOf="@id/recovered_content_label"
+        android:text="Deaths"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:layout_margin="8dp"/>
+
+    <TextView
+        android:id="@+id/recovered_content_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/incharge_content_label"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/deaths_content_label"
+        android:text="Recovered"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:layout_margin="8dp"/>
+    
+    <TextView
+        android:id="@+id/affected_content_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@id/affected_content_label"
+        app:layout_constraintRight_toRightOf="@id/affected_content_label"
+        app:layout_constraintTop_toBottomOf="@id/affected_content_label"
+        android:text="No info"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/deaths_content_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@id/deaths_content_label"
+        app:layout_constraintRight_toRightOf="@id/deaths_content_label"
+        app:layout_constraintTop_toBottomOf="@id/deaths_content_label"
+        android:text="No info"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/recovered_content_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@id/recovered_content_label"
+        app:layout_constraintRight_toRightOf="@id/recovered_content_label"
+        app:layout_constraintTop_toBottomOf="@id/recovered_content_label"
+        android:text="No info"
+        android:textSize="16sp"/>
+
+    <Button
+        android:id="@+id/check_web_content_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/affected_content_tv"
+        app:layout_constraintRight_toLeftOf="@id/call_content_button"
+        android:layout_margin="16dp"
+        android:background="@color/colorPrimary"
+        android:text="Web"
+        android:textColor="@android:color/white"/>
+
+    <Button
+        android:id="@+id/call_content_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorPrimary"
+        android:text="Call"
+        android:textColor="@android:color/white"
+        app:layout_constraintLeft_toRightOf="@id/check_web_content_button"
+        app:layout_constraintRight_toLeftOf="@id/email_content_button"
+        app:layout_constraintTop_toBottomOf="@id/deaths_content_tv" />
+
+    <Button
+        android:id="@+id/email_content_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorPrimary"
+        android:text="Email"
+        android:textColor="@android:color/white"
+        app:layout_constraintLeft_toRightOf="@id/call_content_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recovered_content_tv" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

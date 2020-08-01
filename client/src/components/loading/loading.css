@@ -1,0 +1,41 @@
+.dot1,
+.dot2,
+.dot3,
+.dot4,
+.dot5 {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin: 2px;
+  animation: scale 1s infinite;
+}
+
+.dot2 {
+  animation-delay: 0.1s;
+}
+
+.dot3 {
+  animation-delay: 0.2s;
+}
+
+.dot4 {
+  animation-delay: 0.3s;
+}
+
+.dot5 {
+  animation-delay: 0.4s;
+}
+
+@keyframes scale {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(0.6);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}

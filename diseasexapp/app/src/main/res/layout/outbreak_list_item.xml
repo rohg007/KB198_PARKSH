@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    map:contentPadding="8dp"
+    map:cardElevation="16dp"
+    android:layout_margin="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/outbreak_list_map"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            map:mapType="normal"
+            map:cameraZoom="13"
+            map:liteMode="true"/>
+
+        <TextView
+            android:id="@+id/disease_name_outbreak_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textStyle="bold"
+            android:text="Disease Name"
+            android:gravity="center_horizontal"/>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

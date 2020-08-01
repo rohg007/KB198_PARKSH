@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">DiseaseX</string>
+    <string name="title_activity_maps">Map</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="intro_string">Please enter the following details so that we can notify you on the following channels. The info you enter here doesn\'t reach us by any means</string>
+</resources>

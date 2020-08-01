@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MapsActivity">
+
+    <item
+        android:id="@+id/view_diseases"
+        android:icon="@drawable/ic_sentiment_dissatisfied_black_24dp"
+        android:title="View Diseases" />
+
+    <item
+        android:id="@+id/view_health_centers"
+        android:icon="@drawable/ic_baseline_home_work_24"
+        android:title="View Health Centers" />
+
+    <item
+        android:id="@+id/view_outbreak"
+        android:icon="@drawable/ic_warning_black_24dp"
+        android:title="View Outbreak Details" />
+
+</menu>
