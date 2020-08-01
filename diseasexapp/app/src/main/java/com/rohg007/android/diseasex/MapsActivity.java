@@ -146,6 +146,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 return true;
             } else if(actionItem.getId() == R.id.view_outbreak){
                 Intent intent = new Intent(MapsActivity.this, OubreaksActivity.class);
+                intent.putExtra("LOCATION", lastLocation);
                 startActivity(intent);
                 return true;
             } else if(actionItem.getId() == R.id.view_health_centers){
@@ -305,7 +306,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             CircleOptions circleOptions = new CircleOptions()
                     .center( outbreaks.get(i).getLatlng())
                     .strokeColor(Color.argb(50, 70,70,70))
-                    .fillColor( Color.argb(100, 150,150,150) )
+                    .fillColor( Color.argb(100, 255,0,0) )
                     .radius( 1000.0 );
             Circle circle = googleMap.addCircle(circleOptions);
             circle.setClickable(true);

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import android.location.Location;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,13 +37,15 @@ public class OubreaksActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
+        Location location = getIntent().getParcelableExtra("LOCATION");
+
         outbreakViewModel = ViewModelProviders.of(this).get(OutbreakViewModel.class);
         outbreakViewModel.init();
 
         RecyclerView outbreakRecyclerView = findViewById(R.id.outbreak_rv);
         ProgressBar progressBar = findViewById(R.id.outbreaks_pb);
 
-        OutbreakAdapter outbreakAdapter = new OutbreakAdapter(outbreaks,this);
+        OutbreakAdapter outbreakAdapter = new OutbreakAdapter(outbreaks,this, location);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
         outbreakRecyclerView.setHasFixedSize(true);
         outbreakRecyclerView.setLayoutManager(staggeredGridLayoutManager);
