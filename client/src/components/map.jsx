@@ -10,11 +10,6 @@ const navStyle = {
   padding: '10px',
 };
 
-const markerList = [
-  { lat: 17.441013, long: 78.391796, info: 10 },
-  { lat: 17.442889, long: 78.396073, info: 20 },
-  { lat: 17.441681, long: 78.394357, info: 10 },
-];
 export default class Map extends Component {
   constructor(props) {
     super(props);
@@ -32,28 +27,50 @@ export default class Map extends Component {
     };
   }
 
-  // showDetails=() => {
-  // this.setState({popupInfo: true});
-  // }
-
-  // hideDetails= ()=> {
-  // this.setState({popupInfo: null});
-  // }
-
   renderPopup(index) {
     return (
       this.state.popupInfo && (
         <Popup
           tipSize={5}
+          style={{ backgroundColor: '#e0cda6' }}
           anchor='bottom-right'
           longitude={parseFloat(this.props.list[index].lng)}
           latitude={parseFloat(this.props.list[index].lat)}
           onMouseLeave={() => this.setState({ popupInfo: null })}
           closeOnClick={true}
         >
-          {/* <p>Total Affected:{this.props.list[index].total_affected}</p>
-          <p>Total Recovered:{this.props.list[index].total_recovered}</p>
-          <p>Total Deaths:{this.props.list[index].total_deaths}</p> */}
+          <div className='container-fluid p-0'>
+            <div className='d-flex align-items-center justify-content-center flex-column p-1'>
+              {this.props.type !== 'Outbreak Regions' ? (
+                <div>
+                  <div>
+                    <strong>Name:</strong>
+                    {console.log(this.props.list)}
+                    {this.props.type === 'Health Centers'
+                      ? this.props.list[index].name
+                      : this.props.list[index].animal.owner.name}
+                  </div>
+                  <div>
+                    <strong>Address:</strong>
+                    {this.props.type === 'Health Centers'
+                      ? this.props.list[index].address
+                      : this.props.list[index].animal.owner.address}
+                  </div>
+                  <div>
+                    <strong>Pin:</strong>
+                    {this.props.type === 'Health Centers'
+                      ? this.props.list[index].pincode
+                      : this.props.list[index].animal.owner.pincode}
+                  </div>
+                </div>
+              ) : (
+                <div>
+                  <strong>Disease:</strong>
+                  {this.props.list[index].disease.name}
+                </div>
+              )}
+            </div>
+          </div>
         </Popup>
       )
     );
@@ -69,9 +86,24 @@ export default class Map extends Component {
           onMouseLeave={() => this.setState({ popupInfo: null })}
           closeOnClick={true}
         >
-          {/* <p>Total Affected:{this.props.list[index].total_affected}</p>
-          <p>Total Recovered:{this.props.list[index].total_recovered}</p>
-          <p>Total Deaths:{this.props.list[index].total_deaths}</p> */}
+          <div className='container-fluid p-0'>
+            <div className='d-flex align-items-center justify-content-center flex-column p-1'>
+              <div>
+                <strong>Name:</strong>
+
+                {this.props.list1[index].patientName}
+              </div>
+              <div>
+                <strong>Address:</strong>
+
+                {this.props.list1[index].patientAddress}
+              </div>
+              <div>
+                <strong>Pin:</strong>
+                {this.props.list1[index].pincode}
+              </div>
+            </div>
+          </div>
         </Popup>
       )
     );
