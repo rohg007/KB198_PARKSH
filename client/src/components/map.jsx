@@ -26,7 +26,7 @@ export default class Map extends Component {
         bearing: 0,
         pitch: 0,
         width: '100%',
-        height: 500,
+        height: 400,
       },
       popupInfo: null,
     };
@@ -101,7 +101,7 @@ export default class Map extends Component {
                 this.setState({ viewport: viewport })
               }
             />
-            {this.props.list.length !== 0
+            {this.props.list !== undefined && this.props.list.length !== 0
               ? this.props.list.map((marker, index) => {
                   return (
                     <div key={index}>
@@ -112,8 +112,17 @@ export default class Map extends Component {
                         name={index}
                       >
                         <Icon
-                          name='marker'
-                          style={{ color: 'red' }}
+                          name={
+                            this.props.type === 'Health Centers'
+                              ? 'hospital'
+                              : 'marker'
+                          }
+                          style={{
+                            color:
+                              this.props.type === 'Health Centers'
+                                ? 'green'
+                                : 'red',
+                          }}
                           onMouseEnter={() =>
                             this.setState({ popupInfo: true })
                           }

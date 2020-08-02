@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import Loading from './loading/loading.jsx';
+import CustomButton from './button.jsx';
+import Maps from './map.jsx';
 import GetAllHumanCases from '../api/humanCases/getAllhumanCase.jsx';
 import UpdateHumanCase from '../api/humanCases/updatehumanCase.jsx';
 import UpdateHealthCenter from '../api/healthCenters/updatehealthCenter';
@@ -11,6 +13,7 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
+  ModalFooter,
   Form,
   FormGroup,
 } from 'reactstrap';
@@ -29,6 +32,7 @@ var sectionStyle = {
 function Human_Case() {
   const [loading, setLoading] = React.useState(false);
   const [modal, setModal] = React.useState(false);
+  const [mapOpen, setMapOpen] = React.useState(false);
   const [humanCases, setHumanCases] = React.useState([]);
   const [overAllError, setOverAllError] = React.useState('');
   const [statusValue, setStatusValue] = React.useState('');
@@ -266,129 +270,161 @@ function Human_Case() {
               {overAllError}
             </div>
           ) : null}
-          <div
-            className='text-center pb-2'
-            style={{
-              fontSize: '24px',
-              fontWeight: '500',
-            }}
-          >
-            Human Cases
-          </div>
-          {localStorage.user ? (
-            <table className='table table-striped table-active'>
-              <thead>
-                <tr>
-                  <th>S.No.</th>
-                  <th>Owner Name</th>
-                  <th>Owner's Email</th>
-                  <th>Contact No.</th>
-                  <th>Disease Name</th>
-                  <th>Status</th>
-                  {JSON.parse(localStorage.getItem('user')).email ===
-                  'admin@gmail.com' ? (
-                    ''
-                  ) : (
-                    <th>Update</th>
-                  )}
-                </tr>
-              </thead>
-              <tbody>
-                {humanCases.map((humanCase, i) => {
-                  return (
-                    <tr key={humanCase._id}>
-                      <th scope='row'>{i + 1}</th>
-                      <td>{humanCase.patientName}</td>
-                      <td>{humanCase.patientEmail}</td>
-                      <td>{humanCase.patientContact}</td>
-                      <td>{humanCase.disease.name}</td>
-                      <td>{humanCase.status}</td>
-                      {JSON.parse(localStorage.getItem('user')).email ===
-                      'admin@gmail.com' ? (
-                        ''
-                      ) : (
-                        <td>
-                          <img
-                            alt='Loading...'
-                            width='10%'
-                            height='50%'
-                            src={editImage}
-                            role='button'
-                            color='dark'
-                            name={i}
-                            style={{ marginBottom: '2rem' }}
-                            onClick={() => {
-                              setId(i);
-                              setModal(true);
-                            }}
-                          />
-                          <Modal isOpen={modal} data-id={i + 10}>
-                            <ModalHeader toggle={() => setModal(!modal)}>
-                              Update the status of the Human Patient
-                            </ModalHeader>
-                            <ModalBody>
-                              <Form>
-                                <FormGroup>
-                                  <div>
+          <div className='container-fluid p-3'>
+            <div className='d-flex align-items-center'>
+              <div className='ml-auto' style={{ width: '150px' }}>
+                <CustomButton type='submit' onClick={() => setMapOpen(true)}>
+                  Locate On Maps
+                </CustomButton>
+              </div>
+            </div>
+            <div
+              className='text-center pb-2'
+              style={{
+                fontSize: '24px',
+                fontWeight: '500',
+              }}
+            >
+              Human Cases
+            </div>
+            {localStorage.user ? (
+              <table className='table table-striped table-active'>
+                <thead>
+                  <tr>
+                    <th>S.No.</th>
+                    <th>Owner Name</th>
+                    <th>Owner's Email</th>
+                    <th>Contact No.</th>
+                    <th>Disease Name</th>
+                    <th>Status</th>
+                    {JSON.parse(localStorage.getItem('user')).email ===
+                    'admin@gmail.com' ? (
+                      ''
+                    ) : (
+                      <th>Update</th>
+                    )}
+                  </tr>
+                </thead>
+                <tbody>
+                  {humanCases.map((humanCase, i) => {
+                    return (
+                      <tr key={humanCase._id}>
+                        <th scope='row'>{i + 1}</th>
+                        <td>{humanCase.patientName}</td>
+                        <td>{humanCase.patientEmail}</td>
+                        <td>{humanCase.patientContact}</td>
+                        <td>{humanCase.disease.name}</td>
+                        <td>{humanCase.status}</td>
+                        {JSON.parse(localStorage.getItem('user')).email ===
+                        'admin@gmail.com' ? (
+                          ''
+                        ) : (
+                          <td>
+                            <img
+                              alt='Loading...'
+                              width='10%'
+                              height='50%'
+                              src={editImage}
+                              role='button'
+                              color='dark'
+                              name={i}
+                              style={{ marginBottom: '2rem' }}
+                              onClick={() => {
+                                setId(i);
+                                setModal(true);
+                              }}
+                            />
+                            <Modal isOpen={modal} data-id={i + 10}>
+                              <ModalHeader toggle={() => setModal(!modal)}>
+                                Update the status of the Human Patient
+                              </ModalHeader>
+                              <ModalBody>
+                                <Form>
+                                  <FormGroup>
                                     <div>
-                                      <input
-                                        type='radio'
-                                        value='infected'
-                                        name='optradio'
-                                        onChange={() =>
-                                          setStatusValue('infected')
-                                        }
-                                      />{' '}
-                                      Infected
+                                      <div>
+                                        <input
+                                          type='radio'
+                                          value='infected'
+                                          name='optradio'
+                                          onChange={() =>
+                                            setStatusValue('infected')
+                                          }
+                                        />{' '}
+                                        Infected
+                                      </div>
+                                      <div>
+                                        <input
+                                          type='radio'
+                                          value='recovered'
+                                          name='optradio'
+                                          onChange={() =>
+                                            setStatusValue('recovered')
+                                          }
+                                        />{' '}
+                                        Recovered
+                                      </div>
+                                      <div>
+                                        <input
+                                          type='radio'
+                                          value='deceased'
+                                          name='optradio'
+                                          onChange={() =>
+                                            setStatusValue('deceased')
+                                          }
+                                        />{' '}
+                                        Deceased
+                                      </div>
                                     </div>
-                                    <div>
-                                      <input
-                                        type='radio'
-                                        value='recovered'
-                                        name='optradio'
-                                        onChange={() =>
-                                          setStatusValue('recovered')
-                                        }
-                                      />{' '}
-                                      Recovered
-                                    </div>
-                                    <div>
-                                      <input
-                                        type='radio'
-                                        value='deceased'
-                                        name='optradio'
-                                        onChange={() =>
-                                          setStatusValue('deceased')
-                                        }
-                                      />{' '}
-                                      Deceased
-                                    </div>
-                                  </div>
 
-                                  <Button
-                                    key={i}
-                                    color='dark'
-                                    style={{ marginTop: '2rem' }}
-                                    onClick={handleSubmit}
-                                    name={i}
-                                    block
-                                  >
-                                    Update
-                                  </Button>
-                                </FormGroup>
-                              </Form>
-                            </ModalBody>
-                          </Modal>
-                        </td>
-                      )}
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          ) : null}
+                                    <Button
+                                      key={i}
+                                      color='dark'
+                                      style={{ marginTop: '2rem' }}
+                                      onClick={handleSubmit}
+                                      name={i}
+                                      block
+                                    >
+                                      Update
+                                    </Button>
+                                  </FormGroup>
+                                </Form>
+                              </ModalBody>
+                            </Modal>
+                          </td>
+                        )}
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            ) : null}
+          </div>
         </div>
       )}
+      {
+        <Modal
+          isOpen={mapOpen}
+          style={{
+            borderRadius: '50px',
+          }}
+        >
+          <ModalBody className='p-3'>
+            <div className='p-3 d-flex align-items-center justify-content-center'>
+              <Maps type='Human Cases' list1={humanCases} />
+            </div>
+          </ModalBody>
+          <ModalFooter>
+            <div className='px-3 py-2 d-flex align-items-center'>
+              <div className='ml-auto' style={{ width: '150px' }}>
+                <CustomButton type='submit' onClick={() => setMapOpen(false)}>
+                  Cancel
+                </CustomButton>
+              </div>
+            </div>
+          </ModalFooter>
+        </Modal>
+      }
     </div>
   );
 }
