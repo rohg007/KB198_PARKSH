@@ -45,5 +45,12 @@
             android:textStyle="italic"
             android:gravity="center_horizontal"/>
 
+        <TextView
+            android:id="@+id/outbreak_list_outbreak_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Outbreak Type"
+            android:layout_gravity="center_horizontal"/>
+
     </LinearLayout>
 </androidx.cardview.widget.CardView>

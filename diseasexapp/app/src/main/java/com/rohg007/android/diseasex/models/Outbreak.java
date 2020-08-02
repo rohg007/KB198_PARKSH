@@ -30,6 +30,12 @@ public class Outbreak implements Parcelable {
     @SerializedName("affected")
     @Expose
     private Integer affected;
+    @SerializedName("flag")
+    @Expose
+    private Boolean flag;
+    @SerializedName("totalInCluster")
+    @Expose
+    private Integer totalInCluster;
     @SerializedName("__v")
     @Expose
     private Integer v;
@@ -37,7 +43,7 @@ public class Outbreak implements Parcelable {
     public Outbreak() {
     }
 
-    public Outbreak(String id, Disease disease, HealthCenter healthCenter, String lat, String lng, Integer deaths, Integer affected, Integer v) {
+    public Outbreak(String id, Disease disease, HealthCenter healthCenter, String lat, String lng, Integer deaths, Integer affected, Boolean flag, Integer totalInCluster, Integer v) {
         this.id = id;
         this.disease = disease;
         this.healthCenter = healthCenter;
@@ -45,6 +51,8 @@ public class Outbreak implements Parcelable {
         this.lng = lng;
         this.deaths = deaths;
         this.affected = affected;
+        this.flag = flag;
+        this.totalInCluster = totalInCluster;
         this.v = v;
     }
 
@@ -92,6 +100,22 @@ public class Outbreak implements Parcelable {
         this.affected = affected;
     }
 
+    public Boolean getFlag() {
+        return flag;
+    }
+
+    public void setFlag(Boolean flag) {
+        this.flag = flag;
+    }
+
+    public Integer getTotalInCluster() {
+        return totalInCluster;
+    }
+
+    public void setTotalInCluster(Integer totalInCluster) {
+        this.totalInCluster = totalInCluster;
+    }
+
     public Integer getV() {
         return v;
     }
@@ -108,6 +132,8 @@ public class Outbreak implements Parcelable {
         this.lng = ((String) in.readValue((String.class.getClassLoader())));
         this.deaths = ((Integer) in.readValue((Integer.class.getClassLoader())));
         this.affected = ((Integer) in.readValue((Integer.class.getClassLoader())));
+        this.flag = ((Boolean) in.readValue(Boolean.class.getClassLoader()));
+        this.totalInCluster = ((Integer) in.readValue((Integer.class.getClassLoader())));
         this.v = ((Integer) in.readValue((Integer.class.getClassLoader())));
     }
 
@@ -119,6 +145,8 @@ public class Outbreak implements Parcelable {
         dest.writeValue(lng);
         dest.writeValue(deaths);
         dest.writeValue(affected);
+        dest.writeValue(flag);
+        dest.writeValue(totalInCluster);
         dest.writeValue(v);
     }
 

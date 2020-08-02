@@ -27,6 +27,7 @@ import com.rohg007.android.diseasex.utils.Formatters;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,7 +65,14 @@ public class CenterDetailSheet extends BottomSheetDialogFragment {
         TextView symptomsTv = v.findViewById(R.id.symptoms_sheet);
         Button centerCallButton = v.findViewById(R.id.center_call);
         TextView outbreakTv = v.findViewById(R.id.outbreak_tv);
+        TextView precautionLivestockTv = v.findViewById(R.id.sheet_precautions_livestock);
+        TextView symptomsVaccinationTv = v.findViewById(R.id.sheet_symptoms_vaccinations);
 
+        if(outbreak.getFlag()){
+            outbreakTv.setText(R.string.animal_outbreak);
+        } else {
+            outbreakTv.setText(R.string.human_outbreak);
+        }
         diseaseNameTv.setText(outbreak.getDisease().getName());
         centerNameTv.setText(outbreak.getHealthCenter().getName());
         centerInchargeTv.setText(outbreak.getHealthCenter().getIncharge());
@@ -88,13 +96,33 @@ public class CenterDetailSheet extends BottomSheetDialogFragment {
             centerAreaTv.setText(outbreak.getHealthCenter().getAddress());
         centerEmailTv.setText(outbreak.getHealthCenter().getEmail());
 
-        String[] precautions = outbreak.getDisease().getPrecautions().split(",");
-        String formattedPrecautions = Formatters.bulletedString(precautions);
-        precautionsTv.setText(Html.fromHtml(formattedPrecautions));
+        if(outbreak.getFlag()){
+            precautionLivestockTv.setText("Livestocks Affected");
+            int n = outbreak.getDisease().getLivestock().size();
+            String[] livestocks = new String[n];
+            for(int i=0;i<n;i++)
+                livestocks[i] = outbreak.getDisease().getLivestock().get(i).getBreed();
+            String formattedLivestock = Formatters.bulletedString(livestocks);
+            precautionsTv.setText(Html.fromHtml(formattedLivestock));
+        } else {
+            String[] precautions = outbreak.getDisease().getPrecautions().split(",");
+            String formattedPrecautions = Formatters.bulletedString(precautions);
+            precautionsTv.setText(Html.fromHtml(formattedPrecautions));
+        }
 
-        String[] symptoms = outbreak.getDisease().getSymptoms().split(",");
-        String formattedSymptoms = Formatters.bulletedString(symptoms);
-        symptomsTv.setText(Html.fromHtml(formattedSymptoms));
+        if(outbreak.getFlag()){
+            symptomsVaccinationTv.setText("Vaccinations");
+            int n = outbreak.getDisease().getVaccine().size();
+            String[] vaccines = new String[n];
+            for(int i=0;i<n;i++)
+                vaccines[i] = outbreak.getDisease().getVaccine().get(i).getName()+" "+outbreak.getDisease().getVaccine().get(i).getDuration()+"Days";
+            String formattedVaccines = Formatters.bulletedString(vaccines);
+            symptomsTv.setText(Html.fromHtml(formattedVaccines));
+        } else {
+            String[] symptoms = outbreak.getDisease().getSymptoms().split(",");
+            String formattedSymptoms = Formatters.bulletedString(symptoms);
+            symptomsTv.setText(Html.fromHtml(formattedSymptoms));
+        }
 
         centerCallButton.setOnClickListener(v1 -> {
             String number = outbreak.getHealthCenter().getContact();
@@ -104,5 +132,4 @@ public class CenterDetailSheet extends BottomSheetDialogFragment {
         });
         return v;
     }
-
 }

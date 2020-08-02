@@ -2,6 +2,8 @@ package com.rohg007.android.diseasex.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,10 +24,12 @@ public class HealthCenterAdapter extends RecyclerView.Adapter<HealthCenterAdapte
 
     private ArrayList<HealthCenter> healthCenters;
     private Context context;
+    private Location currLocation;
 
-    public HealthCenterAdapter(Context context, ArrayList<HealthCenter> healthCenters) {
+    public HealthCenterAdapter(Context context, ArrayList<HealthCenter> healthCenters, Location currLocation) {
         this.context = context;
         this.healthCenters = healthCenters;
+        this.currLocation = currLocation;
     }
 
     @NonNull
@@ -47,6 +51,13 @@ public class HealthCenterAdapter extends RecyclerView.Adapter<HealthCenterAdapte
             holder.affectedContent.setText(healthCenter.getTotalAffected().toString());
             holder.deathsContent.setText(healthCenter.getTotalDeaths().toString());
             holder.recoveredContent.setText(healthCenter.getTotalRecovered().toString());
+
+            Location temp = new Location(LocationManager.GPS_PROVIDER);
+            temp.setLatitude(healthCenter.getLatlng().latitude);
+            temp.setLongitude(healthCenter.getLatlng().longitude);
+            float dist = currLocation.distanceTo(temp);
+            dist/=1000;
+            holder.distTextView.setText(Double.toString(Math.floor(dist)) + " Kms Away");
 
             holder.webContentButton.setOnClickListener(v -> {
                 Intent i = new Intent(Intent.ACTION_VIEW);
@@ -82,6 +93,7 @@ public class HealthCenterAdapter extends RecyclerView.Adapter<HealthCenterAdapte
         Button webContentButton;
         Button phoneContentButton;
         Button emailContentButton;
+        TextView distTextView;
 
         public HealthCenterViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -94,6 +106,7 @@ public class HealthCenterAdapter extends RecyclerView.Adapter<HealthCenterAdapte
             webContentButton = itemView.findViewById(R.id.check_web_content_button);
             phoneContentButton = itemView.findViewById(R.id.call_content_button);
             emailContentButton = itemView.findViewById(R.id.email_content_button);
+            distTextView = itemView.findViewById(R.id.cur_dist_tv);
         }
     }
 }

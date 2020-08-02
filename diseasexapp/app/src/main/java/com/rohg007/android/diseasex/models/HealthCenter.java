@@ -3,6 +3,7 @@ package com.rohg007.android.diseasex.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -46,6 +47,12 @@ public class HealthCenter implements Parcelable {
     @SerializedName("total_recovered")
     @Expose
     private Integer totalRecovered;
+    @SerializedName("lat")
+    @Expose
+    private String lat;
+    @SerializedName("lng")
+    @Expose
+    private String lng;
     @SerializedName("__v")
     @Expose
     private Integer v;
@@ -153,6 +160,10 @@ public class HealthCenter implements Parcelable {
 
     public void setTotalRecovered(Integer totalRecovered) {
         this.totalRecovered = totalRecovered;
+    }
+
+    public LatLng getLatlng() {
+        return new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
     }
 
     protected HealthCenter(Parcel in) {

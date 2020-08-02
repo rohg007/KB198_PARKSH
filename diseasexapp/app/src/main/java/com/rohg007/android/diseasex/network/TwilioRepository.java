@@ -24,6 +24,10 @@ public class TwilioRepository {
     public void sendMessage(Outbreak o) {
         String body = "You entered an outbreak region at "+ Calendar.getInstance().getTime().toString()+"."+
                 o.getDisease().getName()+" is spreading in this area. "+"Some precautions "+o.getDisease().getPrecautions();
+        if(o.getFlag()){
+            body = "You entered an animal outbreak region at "+ Calendar.getInstance().getTime().toString()+"."+
+                    o.getDisease().getLivestock().get(0).getBreed()+" is affected in this area. "+"Some preferred vaccinations: "+o.getDisease().getVaccine().get(0).getName();
+        }
         String from = "+12199644916";
         String to = "+919829661751";
         if(body.length()>122){

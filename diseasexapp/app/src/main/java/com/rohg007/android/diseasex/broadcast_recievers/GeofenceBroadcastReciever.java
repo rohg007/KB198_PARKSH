@@ -107,9 +107,11 @@ public class GeofenceBroadcastReciever extends BroadcastReceiver {
 
     private Notification createNotification(Context context, String msg, PendingIntent notificationPendingIntent, Outbreak o) {
         Log.i(LOG_TAG, "createNotification");
+        String channelId = (o.getFlag()) ? Constants.ANIMAL_CHANNEL_ID : Constants.CHANNEL_ID;
+        String title = (o.getFlag()) ? "You're in an Animal Outbreak Zone" : "You're in an Outbreak Zone";
         Notification notification = new NotificationCompat.Builder(context, Constants.CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_notification_icon)
-                .setContentTitle("You're in an Outbreak Zone")
+                .setContentTitle(title)
                 .setContentText(o.getDisease().getName().concat(" is spreading in this area!\nTap to enter the app to view the precautions or contact the health center."))
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(o.getDisease().getName().concat(" is spreading in this area!\nTap to enter the app to view the precautions or contact the health center.")))
                 .setContentIntent(notificationPendingIntent)
@@ -122,6 +124,27 @@ public class GeofenceBroadcastReciever extends BroadcastReceiver {
 
     private String getEmailBody(Outbreak o){
         Date currDate = Calendar.getInstance().getTime();
+
+        if(o.getFlag()){
+            String body = "Hello from DiseaseX\n\n"
+                    +"You entered an animal outbreak region at "+currDate.toString()+"\n"
+                    +"Some Info about the region:\n\n"
+                    +"Disease Name: "+o.getDisease().getName()+"\n"
+                    +"Livestock Affected: "+o.getDisease().getLivestock().get(0).getBreed()+"\n"
+                    +"Vaccination Preferred: "+o.getDisease().getVaccine().get(0).getName()+"\n"
+                    +"Morbidity: "+o.getDisease().getMorbidity().toString()+"\n"
+                    +"Mortality: "+o.getDisease().getMortality().toString()+"\n\n"
+                    +"Associated Health Center:\n\n"
+                    +"Center Name: "+o.getHealthCenter().getName()+"\n"
+                    +"Address: "+o.getHealthCenter().getAddress()+"\n"
+                    +"Contact Number: "+o.getHealthCenter().getContact()+"\n"
+                    +"Email: "+o.getHealthCenter().getEmail()+"\n"
+                    +"Web: "+o.getHealthCenter().getWeb()+"\n\n"
+                    +"Wishing you health!\n"
+                    +"DiseaseX";
+            return body;
+        }
+
         String body = "Hello from DiseaseX\n\n"
                 +"You entered an outbreak region at "+currDate.toString()+"\n"
                 +"Some Info about the region:\n\n"
@@ -139,6 +162,7 @@ public class GeofenceBroadcastReciever extends BroadcastReceiver {
                 +"Wishing you health!\n"
                 +"DiseaseX";
         return body;
-    }
 
+
+    }
 }

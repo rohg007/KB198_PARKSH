@@ -72,6 +72,7 @@ public class OutbreakAdapter extends RecyclerView.Adapter<OutbreakAdapter.ViewHo
         private TextView distTextView;
         public GoogleMap googleMap;
         private View layout;
+        private TextView outbreakTypeTv;
 
         private ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -80,6 +81,7 @@ public class OutbreakAdapter extends RecyclerView.Adapter<OutbreakAdapter.ViewHo
             diseaseNameTv = layout.findViewById(R.id.disease_name_outbreak_list);
             addressTextView = layout.findViewById(R.id.outbreak_list_address_tv);
             distTextView = layout.findViewById(R.id.outbreak_list_dist_tv);
+            outbreakTypeTv = layout.findViewById(R.id.outbreak_list_outbreak_type);
             if(mapView!=null){
                 mapView.onCreate(null);
                 mapView.getMapAsync(this);
@@ -120,6 +122,10 @@ public class OutbreakAdapter extends RecyclerView.Adapter<OutbreakAdapter.ViewHo
             float dist = currLocation.distanceTo(temp);
             dist/=1000;
             distTextView.setText(Double.toString(Math.floor(dist)) + " Kms Away");
+            if(item.getFlag())
+                outbreakTypeTv.setText("Animal Outbreak");
+            else
+                outbreakTypeTv.setText("Human Outbreak");
         }
 
         private String getGeocodeLocation(LatLng location){

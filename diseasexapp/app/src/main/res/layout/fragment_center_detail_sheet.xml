@@ -110,6 +110,7 @@
             android:text="gupta.rohan@live.com" />
 
         <TextView
+            android:id="@+id/sheet_precautions_livestock"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -124,6 +125,7 @@
             android:text="Precautions Here"/>
 
         <TextView
+            android:id="@+id/sheet_symptoms_vaccinations"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
