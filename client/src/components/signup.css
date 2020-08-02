@@ -44,7 +44,6 @@ html,
   background-color: #cfd8dc;
 }
 .zoom {
-  padding: 50px;
   background-color: black;
   transition: transform 0.2s;
   width: 200px !important;

@@ -251,7 +251,7 @@ class Health_center extends Component {
                   >
                     {user.email === 'admin@gmail.com' ? (
                       <a
-                        className='btn btn-block btn-dark zoom'
+                        className='btn btn-block btn-dark zoom px-2'
                         href='/allhealthcenters'
                         style={{ marginRight: '0.5rem', width: '20px' }}
                       >
@@ -261,7 +261,7 @@ class Health_center extends Component {
                             : 'सारे स्वास्थ्य केंद्र'}
                         </h6>
                         <br></br>
-                        <p>
+                        <p style={{ fontSize: '13px', textAlign: 'center' }}>
                           {!this.state.language
                             ? 'All the registered health center details'
                             : 'सारे  स्वा्थ्य केंद्र मामलों की सूची'}
