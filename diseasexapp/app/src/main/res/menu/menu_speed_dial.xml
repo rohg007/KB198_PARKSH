@@ -19,4 +19,9 @@
         android:icon="@drawable/ic_warning_black_24dp"
         android:title="View Outbreak Details" />
 
+    <item
+        android:id="@+id/diagnose_self"
+        android:icon="@android:drawable/ic_delete"
+        android:title="@string/menu_diagnosis"/>
+
 </menu>

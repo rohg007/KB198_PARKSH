@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:contentPadding="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/menu_diagnosis"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/diagnose_info"/>
+
+        <TextView
+            android:id="@+id/general_text_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/diagnose_select_request"
+            android:layout_marginTop="16dp"
+            android:textStyle="bold"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/swelling_ankle_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/swelling_of_ankle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <CheckBox
+                android:id="@+id/ingestion_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/indigestion"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/swelling_ankle_checkbox"/>
+
+            <CheckBox
+                android:id="@+id/constipation_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/constipation"
+                app:layout_constraintTop_toBottomOf="@id/swelling_ankle_checkbox"
+                app:layout_constraintStart_toStartOf="@id/swelling_ankle_checkbox" />
+
+            <CheckBox
+                android:id="@+id/nosia_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/nosia"
+                app:layout_constraintStart_toStartOf="@id/ingestion_checkbox"
+                app:layout_constraintTop_toBottomOf="@id/swelling_ankle_checkbox" />
+
+            <CheckBox
+                android:id="@+id/body_dullness_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/body_dullness"
+                app:layout_constraintTop_toBottomOf="@id/constipation_checkbox"
+                app:layout_constraintStart_toStartOf="@id/constipation_checkbox"/>
+
+            <CheckBox
+                android:id="@+id/skin_redning_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/skin_redning"
+                app:layout_constraintTop_toBottomOf="@id/constipation_checkbox"
+                app:layout_constraintStart_toStartOf="@id/nosia_checkbox"/>
+
+            <CheckBox
+                android:id="@+id/fever_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fever"
+                app:layout_constraintTop_toBottomOf="@id/body_dullness_checkbox"
+                app:layout_constraintStart_toStartOf="@id/body_dullness_checkbox"/>
+
+            <CheckBox
+                android:id="@+id/dark_leg_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dark_leg"
+                app:layout_constraintStart_toStartOf="@id/skin_redning_checkbox"
+                app:layout_constraintTop_toBottomOf="@id/body_dullness_checkbox"/>
+            
+            <CheckBox
+                android:id="@+id/painful_legs_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/painful_movement_of_legs"
+                app:layout_constraintTop_toBottomOf="@+id/fever_checkbox"
+                app:layout_constraintStart_toStartOf="@id/fever_checkbox"/>
+
+            <CheckBox
+                android:id="@+id/non_fertile_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/non_fertile"
+                app:layout_constraintTop_toBottomOf="@id/dark_leg_checkbox"
+                app:layout_constraintStart_toStartOf="@id/dark_leg_checkbox"/>
+
+            <CheckBox
+                android:id="@+id/reproductive_parts_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/reproductive_parts_failure"
+                app:layout_constraintTop_toBottomOf="@id/painful_legs_checkbox"
+                app:layout_constraintStart_toStartOf="@id/painful_legs_checkbox"/>
+
+            <CheckBox
+                android:id="@+id/skin_whitening_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/skin_whitening"
+                app:layout_constraintTop_toBottomOf="@id/painful_legs_checkbox"
+                app:layout_constraintStart_toStartOf="@id/non_fertile_checkbox"/>
+
+            <CheckBox
+                android:id="@+id/lack_of_blood_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lack_of_blood"
+                app:layout_constraintTop_toBottomOf="@id/reproductive_parts_checkbox"
+                app:layout_constraintStart_toStartOf="@id/reproductive_parts_checkbox"/>
+
+            <CheckBox
+                android:id="@+id/spots_on_skin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/spots_on_skin"
+                app:layout_constraintTop_toBottomOf="@id/reproductive_parts_checkbox"
+                app:layout_constraintStart_toStartOf="@id/skin_whitening_checkbox"/>
+
+            <CheckBox
+                android:id="@+id/small_spots_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/small_spots_on_whole_body"
+                app:layout_constraintTop_toBottomOf="@id/lack_of_blood_checkbox"
+                app:layout_constraintStart_toStartOf="@id/lack_of_blood_checkbox"/>
+
+            <CheckBox
+                android:id="@+id/weakness_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/weakness"
+                app:layout_constraintTop_toBottomOf="@id/lack_of_blood_checkbox"
+                app:layout_constraintStart_toStartOf="@id/spots_on_skin"/>
+
+            <CheckBox
+                android:id="@+id/lack_of_appetite_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lack_of_appetite"
+                app:layout_constraintTop_toBottomOf="@id/small_spots_checkbox"
+                app:layout_constraintStart_toStartOf="@id/small_spots_checkbox"/>
+            
+            <CheckBox
+                android:id="@+id/break_in_skin_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/break_in_skin"
+                app:layout_constraintTop_toBottomOf="@id/small_spots_checkbox"
+                app:layout_constraintStart_toStartOf="@id/weakness_checkbox"/>
+
+            <CheckBox
+                android:id="@+id/abdominal_pain_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/abdominal_pain"
+                app:layout_constraintTop_toBottomOf="@id/lack_of_appetite_checkbox"
+                app:layout_constraintStart_toStartOf="@id/lack_of_appetite_checkbox"/>
+
+            <CheckBox
+                android:id="@+id/vomiting_blood_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/vomitting_blood"
+                app:layout_constraintStart_toStartOf="@id/break_in_skin_checkbox"
+                app:layout_constraintTop_toBottomOf="@id/lack_of_appetite_checkbox"/>
+
+            <CheckBox
+                android:id="@+id/diarrhea_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/diarrhea"
+                app:layout_constraintTop_toBottomOf="@id/abdominal_pain_checkbox"
+                app:layout_constraintStart_toStartOf="@id/abdominal_pain_checkbox"/>
+
+            <CheckBox
+                android:id="@+id/headache_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/headache"
+                app:layout_constraintTop_toBottomOf="@id/abdominal_pain_checkbox"
+                app:layout_constraintStart_toStartOf="@id/vomiting_blood_checkbox"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/diagnose_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/headache_checkbox"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@string/diagnose"
+                android:layout_marginTop="16dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/cancel_diagnose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:text="@string/cancel"
+                app:layout_constraintEnd_toStartOf="@id/diagnose_button"
+                app:layout_constraintTop_toBottomOf="@id/headache_checkbox"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -59,8 +59,10 @@ import com.google.android.gms.tasks.Task;
 import com.leinardi.android.speeddial.SpeedDialActionItem;
 import com.leinardi.android.speeddial.SpeedDialView;
 import com.rohg007.android.diseasex.broadcast_recievers.GeofenceBroadcastReciever;
+import com.rohg007.android.diseasex.models.Disease;
 import com.rohg007.android.diseasex.models.Outbreak;
 import com.rohg007.android.diseasex.ui.CenterDetailSheet;
+import com.rohg007.android.diseasex.ui.DiagnosisQuestionFragment;
 import com.rohg007.android.diseasex.ui.DiseasesActivity;
 import com.rohg007.android.diseasex.ui.HealthCentersActivity;
 import com.rohg007.android.diseasex.ui.OubreaksActivity;
@@ -93,6 +95,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GeofencingClient geofencingClient;
     private Circle geoFenceCircle;
     private ArrayList<Outbreak> outbreaks = new ArrayList<>();
+    private ArrayList<Disease> diseases = new ArrayList<>();
     SharedPreferences sharedPreferences;
 
     @Override
@@ -153,6 +156,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Intent intent = new Intent(MapsActivity.this, HealthCentersActivity.class);
                 startActivity(intent);
                 return true;
+            } else if(actionItem.getId() == R.id.diagnose_self){
+                getSupportFragmentManager().beginTransaction().add(new DiagnosisQuestionFragment(diseases), DiagnosisQuestionFragment.TAG).commit();
             }
             return false;
         });
@@ -299,6 +304,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         this.outbreaks = outbreaks;
         drawGeofenceCircles();
         Log.wtf(MapsActivity.class.getSimpleName(),Integer.toString(outbreaks.size()));
+    }
+
+    @Override
+    public void passDisease(ArrayList<Disease> diseases) {
+        this.diseases = diseases;
     }
 
     private void drawGeofenceCircles(){

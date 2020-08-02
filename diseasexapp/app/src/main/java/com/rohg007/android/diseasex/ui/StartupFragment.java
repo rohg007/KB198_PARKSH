@@ -18,7 +18,9 @@ import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
 import com.rohg007.android.diseasex.broadcast_recievers.GeofenceBroadcastReciever;
+import com.rohg007.android.diseasex.models.Disease;
 import com.rohg007.android.diseasex.models.Outbreak;
+import com.rohg007.android.diseasex.viewmodels.DiseaseViewModel;
 import com.rohg007.android.diseasex.viewmodels.OutbreakViewModel;
 
 import java.io.IOException;
@@ -41,7 +43,9 @@ public class StartupFragment extends Fragment {
     public static final String TAG = "startup_fragment";
     private PackInitialData mCallback;
     private ArrayList<Outbreak> outbreaksList = new ArrayList<>();
+    private ArrayList<Disease> diseaseList = new ArrayList<>();
     private OutbreakViewModel outbreakViewModel;
+    private DiseaseViewModel diseaseViewModel;
     private GeofencingClient geofencingClient;
     private PendingIntent geofencePendingIntent;
 
@@ -49,8 +53,10 @@ public class StartupFragment extends Fragment {
     public void onAttach(@NonNull Activity activity) {
         super.onAttach(activity);
         outbreakViewModel = ViewModelProviders.of((FragmentActivity) activity).get(OutbreakViewModel.class);
+        diseaseViewModel = ViewModelProviders.of((FragmentActivity) activity).get(DiseaseViewModel.class);
         geofencingClient = LocationServices.getGeofencingClient(activity);
         outbreakViewModel.init();
+        diseaseViewModel.init();
     }
 
     @Override
@@ -75,7 +81,12 @@ public class StartupFragment extends Fragment {
                 startGeofence();
             }
         });
-
+        diseaseViewModel.getDiseaseRepository().observe(this, diseases -> {
+            if(diseases!=null){
+                diseaseList.addAll(diseases);
+                mCallback.passDisease(diseaseList);
+            }
+        });
     }
 
     @Override

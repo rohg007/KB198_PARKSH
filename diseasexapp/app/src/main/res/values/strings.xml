@@ -5,4 +5,36 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="intro_string">Please enter the following details so that we can notify you on the following channels. The info you enter here doesn\'t reach us by any means</string>
+    <string name="menu_diagnosis">Diagnose Yourself</string>
+    <string name="diagnose_info">This space helps you diagnose yourself to the diseases existing in our database</string>
+    <string name="diagnose_select_request">Please Select the Symptoms below that you\'re currently developing:</string>
+    <string name="swelling_of_ankle">Swelling of Ankle</string>
+    <string name="indigestion">Indigestion</string>
+    <string name="constipation">Constipation</string>
+    <string name="nosia">Nosia</string>
+    <string name="body_dullness">Body Dullness</string>
+    <string name="skin_redning">Skin Redning</string>
+    <string name="fever">Fever</string>
+    <string name="dark_leg">Dark Leg</string>
+    <string name="painful_movement_of_legs">Painful Legs</string>
+    <string name="non_fertile">Non-Fertile</string>
+    <string name="reproductive_parts_failure">Reproductive Failure</string>
+    <string name="skin_whitening">Skin Whitening</string>
+    <string name="lack_of_blood">Lack of Blood</string>
+    <string name="spots_on_skin">Spots on Skin</string>
+    <string name="small_spots_on_whole_body">Small Spots Body</string>
+    <string name="weakness">Weakness</string>
+    <string name="lack_of_appetite">Lack of Appetite</string>
+    <string name="break_in_skin">Break in Skin</string>
+    <string name="abdominal_pain">Abdominal Pain</string>
+    <string name="vomitting_blood">Vomitting Blood</string>
+    <string name="diarrhea">Diarrhea</string>
+    <string name="headache">Headache</string>
+    <string name="diagnose">Diagnose</string>
+    <string name="diagnosis_results">Diagnosis Results</string>
+    <string name="results_info">Your diagnosis results are here</string>
+    <string name="cancel">CANCEL</string>
+    <string name="high_risk">High Risk</string>
+    <string name="moderate_risk">Moderate Risk</string>
+    <string name="risk_alert">You are running at high risk, we highly recommend you to approach the nearest health center and get yourself diagnosed throughly.</string>
 </resources>
