@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Doughnut, Bar } from 'react-chartjs-2';
 import Loading from './loading/loading.jsx';
+import CheckedField from './switch/switchtoggler.jsx';
 import GetAllDiseases from '../api/diseases/getAllDiseases';
 import GetAllAnimalCases from '../api/animalCase/getAllAnimalCases';
 import GetAllHumanCases from '../api/humanCases/getAllhumanCase';
@@ -26,6 +27,7 @@ class Health_center extends Component {
     animalCases: [],
     humanCases: [],
     outbreaks: [],
+    language: false,
     // healthCenters: [],
     user: {},
     barChart: [],
@@ -116,7 +118,9 @@ class Health_center extends Component {
       this.setState({ overAllError: 'Server Error!' });
     }
   }
-
+  onChange = () => {
+    this.setState({ language: !this.state.language });
+  };
   render() {
     let user = JSON.parse(localStorage.getItem('user'));
     return (
@@ -158,9 +162,25 @@ class Health_center extends Component {
                       }}
                       className='col-sm-6 pl-4'
                     >
+                      <CheckedField
+                        id='hideChecker'
+                        heading={
+                          !this.state.language
+                            ? 'Language Switching'
+                            : 'भाषा बदलें'
+                        }
+                        checked={this.state.language}
+                        onChange={() => {
+                          this.onChange();
+                        }}
+                      />
                       <Bar
                         data={{
-                          labels: ['Infected', 'Recovered', 'Deaths'],
+                          labels: [
+                            !this.state.language ? 'Infected' : 'संक्रमित',
+                            !this.state.language ? 'Recoverd' : 'बरामद',
+                            !this.state.language ? 'Deaths' : 'मृतक',
+                          ],
                           datasets: [
                             {
                               label: 'People',
@@ -184,7 +204,9 @@ class Health_center extends Component {
                           title: {
                             display: true,
                             position: 'top',
-                            text: `HEALTH CENTER : ${this.state.user.name} Status`,
+                            text: !this.state.language
+                              ? `HEALTH CENTER : ${this.state.user.name} Status`
+                              : 'स्वास्थ्य केंद्र: एस एम एस हॉस्पिटल स्थिति',
                             fontSize: '20',
                             fontColor: 'black',
                           },
@@ -218,8 +240,9 @@ class Health_center extends Component {
                     }}
                   >
                     {' '}
-                    FUNCTIONALITIES{' '}
+                    {!this.state.language ? 'FUNCTIONALITIES' : 'कार्यक्षमताओं'}
                   </h3>
+
                   <div
                     className='btn-group'
                     role='group'
@@ -232,9 +255,17 @@ class Health_center extends Component {
                         href='/allhealthcenters'
                         style={{ marginRight: '0.5rem', width: '20px' }}
                       >
-                        <h6>HEATH CENTERS</h6>
+                        <h6>
+                          {!this.state.language
+                            ? 'HEALTH CENTERS'
+                            : 'सारे स्वास्थ्य केंद्र'}
+                        </h6>
                         <br></br>
-                        <p>All the registered health center details</p>
+                        <p>
+                          {!this.state.language
+                            ? 'All the registered health center details'
+                            : 'सारे  स्वा्थ्य केंद्र मामलों की सूची'}
+                        </p>
                         <p style={{ textAlign: 'right' }}>➜</p>
                       </a>
                     ) : (
@@ -243,11 +274,16 @@ class Health_center extends Component {
                         href='/new_humancase'
                         style={{ marginRight: '0.5rem' }}
                       >
-                        <h6>NEW HUMAN CASE</h6>
+                        <h6>
+                          {!this.state.language
+                            ? 'NEW HUMAN CASE'
+                            : 'नया मानव मामला'}
+                        </h6>
                         <br></br>
                         <p>
-                          Add details of new case for human registered in your
-                          health center
+                          {!this.state.language
+                            ? 'Add details of new case for human registered in your health center'
+                            : 'आपके स्वा्थ्य केंद्र के नए मानव मामले का विवरण दर्ज करे'}
                         </p>
                         <p style={{ textAlign: 'right' }}>➜</p>
                       </a>
@@ -260,11 +296,16 @@ class Health_center extends Component {
                         href='/new_animalcase'
                         style={{ marginRight: '0.5rem' }}
                       >
-                        <h6>NEW ANIMAL CASE</h6>
+                        <h6>
+                          {!this.state.language
+                            ? 'NEW ANIMAL CASE'
+                            : 'नया जानवर मामला'}
+                        </h6>
                         <br></br>
                         <p>
-                          Add details of new case for animal registered in your
-                          health center
+                          {!this.state.language
+                            ? '  Add details of new case for animal registered in your health center'
+                            : 'आपके स्वा्थ्य केंद्र के नए जानवर मामले का विवरण दर्ज करे'}
                         </p>
                         <p style={{ textAlign: 'right' }}>➜</p>
                       </a>
@@ -274,11 +315,16 @@ class Health_center extends Component {
                       className='btn btn-large btn-dark zoom'
                       href='/human_case'
                     >
-                      <h6>ALL HUMAN CASES</h6>
+                      <h6>
+                        {!this.state.language
+                          ? 'ALL HUMAN CASES'
+                          : 'सारे मानव मामलें'}
+                      </h6>
                       <br></br>
                       <p>
-                        Find list of all the human cases added and can update
-                        the status
+                        {!this.state.language
+                          ? 'Find list of all the human cases added and can update the status'
+                          : 'सारे मानव मामलों की सूची या स्थिति बदले'}
                       </p>
                       <p style={{ textAlign: 'right' }}>➜</p>
                     </a>
@@ -287,21 +333,31 @@ class Health_center extends Component {
                       href='/animal_case'
                       style={{ marginRight: '0.5rem' }}
                     >
-                      <h6>ALL ANIMAL CASES</h6>
+                      <h6>
+                        {!this.state.language
+                          ? 'ALL HUMAN CASES'
+                          : 'सारे जानवर मामलें'}
+                      </h6>
                       <br></br>
                       <p>
-                        Find list of all the animal cases added and can update
-                        the status
+                        {!this.state.language
+                          ? ' Find list of all the animal cases added and can update the status'
+                          : 'सारे जानवर मामलों की सूची या स्थिति बदले'}
                       </p>
                       <p style={{ textAlign: 'right' }}>➜</p>
                     </a>
                     {user.email === 'admin@gmail.com' ? (
                       <a className='btn btn-large btn-dark zoom' href='/admin'>
-                        <h6>NOTIFY ALL</h6>
+                        <h6>
+                          {!this.state.language
+                            ? 'NOTIFY ALL'
+                            : 'सबको सूचित करें'}
+                        </h6>
                         <br></br>
                         <p>
-                          Notifies all the patients for at once for their
-                          respective vaccines
+                          {!this.state.language
+                            ? 'Notifies all the patients at once for their respective vaccines'
+                            : 'सभी मरीजों को एक साथ उनके टीकाकरण के बारे में सूचित किया जाता हैं'}
                         </p>
                         <p style={{ textAlign: 'right' }}>➜</p>
                       </a>
@@ -372,7 +428,7 @@ class Health_center extends Component {
                   textAlign: 'center',
                 }}
               >
-                <h2>DISEASES</h2>
+                <h2>{!this.state.language ? 'DISEASES' : 'रोगों'}</h2>
               </div>
             </div>
 
@@ -392,7 +448,11 @@ class Health_center extends Component {
                         <div className='card-body'>
                           <Doughnut
                             data={{
-                              labels: ['Infected', 'Recoverd', 'Deaths'],
+                              labels: [
+                                !this.state.language ? 'Infected' : 'संक्रमित',
+                                !this.state.language ? 'Recoverd' : 'बरामद',
+                                !this.state.language ? 'Deaths' : 'मृतक',
+                              ],
                               datasets: [
                                 {
                                   label: 'Rainfall',

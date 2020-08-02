@@ -31,39 +31,40 @@ html,
   width: 100%;
   height: 100%;
 }
-.table-striped >thead{
-  background-color: #CFD8DC;
+.table-striped > thead {
+  background-color: #cfd8dc;
 }
-.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
-  background-color: #B0BEC5;
+.table-striped > tbody > tr:nth-child(2n + 1) > td,
+.table-striped > tbody > tr:nth-child(2n + 1) > th {
+  background-color: #b0bec5;
 }
 
-.table-striped > tbody > tr:nth-child(2n) > td, .table-striped > tbody > tr:nth-child(2n) > th {
-  background-color:#CFD8DC;
+.table-striped > tbody > tr:nth-child(2n) > td,
+.table-striped > tbody > tr:nth-child(2n) > th {
+  background-color: #cfd8dc;
 }
 .zoom {
   padding: 50px;
-  background-color:whitesmoke;
-  transition: transform .2s;
+  background-color: black;
+  transition: transform 0.2s;
   width: 200px !important;
   height: 180px !important;
   margin-right: 0 auto;
-
 }
 .zoomm {
   padding: 50px;
-  background-color:whitesmoke;
-  transition: transform .2s;
+  background-color: whitesmoke;
+  transition: transform 0.2s;
   width: 100%;
   height: 100%;
   margin-right: 0 auto;
-  text-emphasis-color: black;  
+  text-emphasis-color: black;
 }
 
 .zoom:hover {
   -ms-transform: scale(1.2); /* IE 9 */
   -webkit-transform: scale(1.2); /* Safari 3-8 */
-  transform: scale(1.2); 
+  transform: scale(1.2);
 }
 
 .navbar-light {
