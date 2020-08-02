@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import Maps from './map.jsx';
 import GetAllHealthCenters from '../api/healthCenters/getAllhealthCenter.jsx';
 import Loading from './loading/loading.jsx';
 
@@ -22,7 +23,6 @@ function AllHealthCenters() {
       setLoading(true);
       GetAllHealthCenters()
         .then((responses) => {
-          console.log(responses);
           setHealthCenters(responses.data);
           setOverAllError('');
           setLoading(false);
@@ -68,6 +68,7 @@ function AllHealthCenters() {
           >
             Health Centers
           </div>
+          <Maps list={healthCenters} />
           {localStorage.user &&
           JSON.parse(localStorage.getItem('user')).email ===
             'admin@gmail.com' ? (

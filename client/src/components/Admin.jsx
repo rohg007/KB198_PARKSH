@@ -1,11 +1,12 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import MessageSend from '../api/messageSend.jsx';
 import Loading from './loading/loading.jsx';
-import { Modal, ModalBody, ModalHeader } from 'reactstrap';
+import Button from './button.jsx';
+import emailSentIllustration from '../images/email-sent.png';
+import { Modal, ModalBody } from 'reactstrap';
 import GetAllAnimalCases from '../api/animalCase/getAllAnimalCases.jsx';
 import UpdateAnimalCase from '../api/animalCase/updateAnimalCase.jsx';
-import UpdateHumanCase from '../api/humanCases/updatehumanCase.jsx';
-import GetAllHumanCases from '../api/humanCases/getAllhumanCase.jsx';
 var sectionStyle = {
   backgroundColor: '#f2e6cb',
   width: '100%',
@@ -16,6 +17,7 @@ var sectionStyle = {
   backgroundSize: 'cover',
 };
 function Admin() {
+  let history = useHistory();
   React.useEffect(() => {
     let today = new Date().toLocaleDateString();
     try {
@@ -26,26 +28,11 @@ function Admin() {
             responses.data.filter((response) => today === response.date)
           );
           setOverAllError('');
-        })
-        .catch((error) => {
-          setOverAllError('Unable to fetch Data');
-          setLoading(false);
-        });
-    } catch (err) {
-      setOverAllError('Server Error');
-      setLoading(false);
-    }
-    try {
-      GetAllHumanCases()
-        .then((responses) => {
-          setHumanCases(
-            responses.data.filter((response) => today === response.date)
-          );
-          setOverAllError('');
           setLoading(false);
         })
         .catch((error) => {
           setOverAllError('Unable to fetch Data');
+          setLoading(false);
         });
     } catch (err) {
       setOverAllError('Server Error');
@@ -54,79 +41,20 @@ function Admin() {
   }, []);
 
   const [submitting, setSubmitting] = React.useState(false);
-  const [humanCases, setHumanCases] = React.useState([]);
   const [animalCases, setAnimalCases] = React.useState([]);
   const [overAllError, setOverAllError] = React.useState('');
   const [loading, setLoading] = React.useState(false);
 
-  function handelHumanCaseDetails(Case) {
+  function handelCaseDetails() {
     let messageBody = `Hello,
-    The vaccination ${Case.disease.vaccine[0].name} for the patient ${Case.patientName} is scheduled today. Kindly report to the nearest healthCenter for the same.Regards DiseaseX team`;
-
-    let tempHumanCases = humanCases;
-    let today = new Date();
-    let dd = String(today.getDate()).padStart(2, '0');
-    let mm = String(today.getMonth() + 1).padStart(2, '0');
-    let yyyy = today.getFullYear();
-    let day = parseInt(dd) + Case.disease.vaccine[0].duration;
-    let month = parseInt(mm);
-    let year = parseInt(yyyy);
-
-    if (day > 30) {
-      month = month + parseInt(day / 30);
-      day = day % 30;
-
-      if (month > 12) {
-        year = year + parseInt(month / 12);
-        month = month % 12;
-      }
-    }
-    let date = month.toString() + '/' + day.toString() + '/' + year.toString();
-    let newHumanCase = { ...Case, date: date };
-    setSubmitting(true);
-
-    try {
-      MessageSend({ to: Case.patientContact, body: messageBody })
-        .then((response) => {
-          if (response.data.success) {
-            UpdateHumanCase(newHumanCase)
-              .then((response) => {
-                setHumanCases(
-                  tempHumanCases.filter(
-                    (humanCase) => humanCase._id !== Case._id
-                  )
-                );
-                setOverAllError('');
-                setSubmitting(false);
-              })
-              .catch((error) => {
-                setOverAllError("Can't able to send sms!");
-
-                setSubmitting(false);
-              });
-          } else {
-            setSubmitting(false);
-          }
-        })
-        .catch((error) => {
-          setOverAllError("Can't able to send sms!");
-          setSubmitting(false);
-        });
-    } catch (err) {
-      setOverAllError(err);
-      setSubmitting(false);
-    }
-  }
-  function handelAnimalCaseDetails(Case) {
-    let messageBody = `Hello,
-    The vaccination ${Case.animal.vaccine.name} for your ${Case.animal.livestock.breed} is scheduled today. Kindly report to the nearest healthCenter for the same.Regards DiseaseX team`;
+    The vaccination ${animalCases[0].animal.vaccine.name} for your ${animalCases[0].animal.livestock.breed} is scheduled today. Kindly report to the nearest healthCenter for the same.Regards DiseaseX team`;
     let tempAnimalCases = animalCases;
     setSubmitting(true);
     let today = new Date();
     let dd = String(today.getDate()).padStart(2, '0');
     let mm = String(today.getMonth() + 1).padStart(2, '0');
     let yyyy = today.getFullYear();
-    let day = parseInt(dd) + Case.animal.vaccine.duration;
+    let day = parseInt(dd) + animalCases[0].animal.vaccine.duration;
     let month = parseInt(mm);
     let year = parseInt(yyyy);
 
@@ -140,20 +68,24 @@ function Admin() {
       }
     }
     let date = month.toString() + '/' + day.toString() + '/' + year.toString();
-    let newAnimalCase = { ...Case, date: date };
+    let newAnimalCase = { ...animalCases[0], date: date };
     try {
-      MessageSend({ to: Case.animal.owner.contact, body: messageBody })
+      MessageSend({
+        to: animalCases[0].animal.owner.contact,
+        body: messageBody,
+      })
         .then((response) => {
           if (response.data.success) {
             UpdateAnimalCase(newAnimalCase)
               .then((response) => {
                 setAnimalCases(
                   tempAnimalCases.filter(
-                    (animalCase) => animalCase._id !== Case._id
+                    (animalCase) => animalCase._id !== animalCases[0]._id
                   )
                 );
-
+                setOverAllError('');
                 setSubmitting(false);
+                history.push('/health_center');
               })
               .catch((error) => {
                 setOverAllError("Can't able to send sms!");
@@ -161,15 +93,16 @@ function Admin() {
                 setSubmitting(false);
               });
           } else {
+            setOverAllError("Can't able to send sms!");
             setSubmitting(false);
           }
         })
         .catch((error) => setOverAllError("Can't able to send sms!"));
     } catch (err) {
       setOverAllError(err);
+      setSubmitting(false);
     }
   }
-  console.log(localStorage);
   return (
     <div className='container-fluid p-0' style={sectionStyle}>
       {localStorage.user ? (
@@ -185,8 +118,15 @@ function Admin() {
             </div>
           ) : (
             <div className='container-fluid p-0'>
+              <div className='px-3 py-2 d-flex align-items-center'>
+                <div className='ml-auto' style={{ width: '150px' }}>
+                  <Button type='submit' onClick={() => handelCaseDetails()}>
+                    Notify All
+                  </Button>
+                </div>
+              </div>
               <div className='row no-gutters '>
-                <div className='col-xl-6 pr-3'>
+                <div className='col-xl-12 pr-3'>
                   {overAllError !== '' ? (
                     <div
                       className='p-3 text-center'
@@ -205,132 +145,43 @@ function Admin() {
                       fontWeight: '500',
                     }}
                   >
-                    Animal Patients
+                    Patients Details
                   </div>
-                  <div
-                    className='bg-white'
-                    style={{ border: '0', borderRadius: '10px' }}
-                  >
-                    {animalCases.length !== 0 ? (
-                      <table
-                        style={{ width: '100%', borderRadius: '10px' }}
-                        className='table table-hover table-condensed table-striped table-responsive table-bordered'
-                      >
-                        <thead>
-                          <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Contact</th>
-                            <th>Status</th>
-                            <th>vaccine</th>
-                            <th />
-                          </tr>
-                        </thead>
 
-                        <tbody>
-                          {animalCases.map((animalCase) => {
-                            return (
-                              <tr key={`${animalCase._id}`}>
-                                <td>{animalCase.animal.owner.name}</td>
-                                <td>{animalCase.animal.owner.email}</td>
-                                <td>{animalCase.animal.owner.contact}</td>
-                                <td>{animalCase.animal.status}</td>
-                                <td>{animalCase.animal.vaccine.name}</td>
+                  {animalCases.length !== 0 ? (
+                    <table className='table table-striped table-active'>
+                      <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Contact</th>
+                          <th>Vaccine</th>
+                          <th>Status</th>
+                          <th />
+                        </tr>
+                      </thead>
 
-                                <td>
-                                  <div>
-                                    <div
-                                      style={{ width: '100px' }}
-                                      className='btn btn-primary btn-block'
-                                      onClick={() =>
-                                        handelAnimalCaseDetails(animalCase)
-                                      }
-                                    >
-                                      NOT SENT
-                                    </div>
-                                  </div>
-                                </td>
-                              </tr>
-                            );
-                          })}
-                        </tbody>
-                      </table>
-                    ) : (
-                      <div className='d-flex align-items-center justify-content-center '>
-                        <div className='p-3'>
-                          No more Active Animal patients to notify!
-                        </div>
+                      <tbody>
+                        {animalCases.map((animalCase) => {
+                          return (
+                            <tr key={`${animalCase._id}`}>
+                              <td>{animalCase.animal.owner.name}</td>
+                              <td>{animalCase.animal.owner.email}</td>
+                              <td>{animalCase.animal.owner.contact}</td>
+                              <td>{animalCase.animal.vaccine.name}</td>
+                              <td>{animalCase.animal.status}</td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  ) : (
+                    <div className='d-flex align-items-center justify-content-center '>
+                      <div className='p-3'>
+                        No more Active Patients to notify!
                       </div>
-                    )}
-                  </div>
-                </div>
-                <div className='col-xl-6'>
-                  <div
-                    className='text-center pb-2'
-                    style={{
-                      fontSize: '20px',
-                      fontWeight: '500',
-                    }}
-                  >
-                    Human Patients
-                  </div>
-                  <div
-                    className='bg-white'
-                    style={{ border: '0', borderRadius: '10px' }}
-                  >
-                    {' '}
-                    {humanCases.length !== 0 ? (
-                      <table
-                        style={{ width: '100%', borderRadius: '10px' }}
-                        className='table table-hover table-condensed table-striped table-responsive table-bordered'
-                      >
-                        <thead>
-                          <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Contact</th>
-                            <th>Status</th>
-                            <th>vaccine</th>
-                            <th />
-                          </tr>
-                        </thead>
-
-                        <tbody>
-                          {humanCases.map((humanCase) => {
-                            return (
-                              <tr key={`${humanCase._id}`}>
-                                <td>{humanCase.patientName}</td>
-                                <td>{humanCase.patientEmail}</td>
-                                <td>{humanCase.patientContact}</td>
-                                <td>{humanCase.status}</td>
-                                <td>{humanCase.disease.vaccine[0].name}</td>
-
-                                <td>
-                                  <div>
-                                    <div
-                                      style={{ width: '100px' }}
-                                      className='btn btn-primary btn-block'
-                                      onClick={() =>
-                                        handelHumanCaseDetails(humanCase)
-                                      }
-                                    >
-                                      NOT SENT
-                                    </div>
-                                  </div>
-                                </td>
-                              </tr>
-                            );
-                          })}
-                        </tbody>
-                      </table>
-                    ) : (
-                      <div className='d-flex align-items-center justify-content-center'>
-                        <div className='p-3'>
-                          Oops! No more Active Human patients to notify!
-                        </div>
-                      </div>
-                    )}
-                  </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -340,14 +191,24 @@ function Admin() {
       {
         <Modal
           isOpen={submitting}
-          style={{ marginTop: '25%', borderRadius: '10px' }}
+          style={{ marginTop: '20%', borderRadius: '10px' }}
         >
-          <ModalHeader>
-            <p>Loading...</p>
-          </ModalHeader>
           <ModalBody className='p-3'>
-            <div className='d-flex align-items-center justify-content-center p-3'>
-              <Loading loadingColor='#ff790e' />
+            <div className='py-2 text-center'>
+              <img src={emailSentIllustration} alt='email-sent' />
+            </div>
+            <div className='py-2'>
+              <p
+                className={`mb-0`}
+                style={{
+                  fontSize: '16px',
+                  fontWeight: '600',
+                  textAlign: 'center',
+                  color: '#364e65',
+                }}
+              >
+                Notifications Sent!
+              </p>
             </div>
           </ModalBody>
         </Modal>

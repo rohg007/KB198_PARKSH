@@ -217,6 +217,11 @@ function NewAnimalCase() {
             population: population,
           },
         ],
+        diagnosis: [
+          'Microscopy',
+          'Electron microscopy',
+          'Measurement of antibody titers in host sera',
+        ],
         morbidity: Math.floor(10 + Math.random() * 90),
         mortality: Math.floor(10 + Math.random() * 90),
         total_affected: Math.floor(10000 + Math.random() * 90000),

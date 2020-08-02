@@ -1,0 +1,30 @@
+.btn {
+  width: 100%;
+  padding: 10px 15px;
+  text-align: center;
+}
+
+.btnText {
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.outlineBtn:focus {
+  outline: none;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+}
+
+.primaryButtonStyle {
+  border-radius: '10px';
+  background-color: #ff790e;
+  color: #fff;
+  border: 0;
+}

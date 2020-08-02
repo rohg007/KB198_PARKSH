@@ -1,6 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import SignUp from '../api/auth/signUpApi.jsx';
+// import Map from "./maps.jsx";
 import Loading from './loading/loading.jsx';
 import './signup.css';
 
@@ -76,8 +77,8 @@ function SignUpPage() {
         address: address,
         pincode: pinCode,
         web: web !== '' ? web : 'www.google.com',
-        lat: '26.922070',
-        lng: '75.778885',
+        lat: '26.' + Math.floor(100000 + Math.random() * 900000).toString(),
+        lng: '75.' + Math.floor(100000 + Math.random() * 900000).toString(),
         total_affected: total_affected,
         total_recovered: total_recovered,
         total_deaths: total_deaths,
@@ -143,13 +144,15 @@ function SignUpPage() {
               }}
             >
               <div className='card-header'>
-                <h3 style={{color:'white'}}>Sign Up</h3>
+                <h3 style={{ color: 'white' }}>Sign Up</h3>
               </div>
               <form onSubmit={handleFormSubmit}>
                 <div className='card-body'>
                   <div className='d-flex align-items-center'>
                     <div className='form-group pr-3' style={{ width: '50%' }}>
-                      <label htmlFor='name' style={{color:'white'}}>Health Center name</label>
+                      <label htmlFor='name' style={{ color: 'white' }}>
+                        Health Center name
+                      </label>
                       <input
                         type='text'
                         id='name'
@@ -176,7 +179,9 @@ function SignUpPage() {
                     </div>
 
                     <div className='form-group' style={{ width: '50%' }}>
-                      <label htmlFor='email' style={{color:'white'}}>Email address</label>
+                      <label htmlFor='email' style={{ color: 'white' }}>
+                        Email address
+                      </label>
                       <input
                         type='email'
                         required
@@ -204,7 +209,9 @@ function SignUpPage() {
                   </div>
                   <div className='d-flex align-items-center'>
                     <div className='form-group pr-3' style={{ width: '50%' }}>
-                      <label style={{color:'white'}} htmlFor='password'>Password</label>
+                      <label style={{ color: 'white' }} htmlFor='password'>
+                        Password
+                      </label>
                       <input
                         type='password'
                         id='password'
@@ -234,7 +241,12 @@ function SignUpPage() {
                       </div>
                     </div>
                     <div className='form-group' style={{ width: '50%' }}>
-                      <label style={{color:'white'}} htmlFor='confirmpassword'>Confirm Password</label>
+                      <label
+                        style={{ color: 'white' }}
+                        htmlFor='confirmpassword'
+                      >
+                        Confirm Password
+                      </label>
                       <input
                         type='password'
                         id='confirmpassword'
@@ -266,7 +278,9 @@ function SignUpPage() {
                   </div>
                   <div className='d-flex align-items-center justify-content-center'>
                     <div className='form-group pr-3' style={{ width: '75%' }}>
-                      <label style={{color:'white'}} htmlFor='address'>Address</label>
+                      <label style={{ color: 'white' }} htmlFor='address'>
+                        Address
+                      </label>
                       <input
                         type='text'
                         id='address'
@@ -294,7 +308,9 @@ function SignUpPage() {
                       </div>
                     </div>
                     <div className='form-group'>
-                      <label style={{color:'white'}} htmlFor='pinCode'>Pin Code</label>
+                      <label style={{ color: 'white' }} htmlFor='pinCode'>
+                        Pin Code
+                      </label>
                       <input
                         type='text'
                         id='pinCode'
@@ -322,10 +338,25 @@ function SignUpPage() {
                       </div>
                     </div>
                   </div>
+                  {/* <div className='d-flex align-items-center justify-content-center'>
+                    <div style={{ margin: '100px' }}>
+                      <Map
+                        google={this.props.google}
+                        center={{ lat: 26.92207, lng: 75.778885 }}
+                        height='300px'
+                        zoom={15}
+                      />
+                    </div>
+                  </div> */}
                   <div className='d-flex align-items-center justify-content-center'>
                     <div className='flex-fill pr-3'>
                       <div className='form-group'>
-                        <label style={{color:'white'}} htmlFor='contactNumber'>Contact</label>
+                        <label
+                          style={{ color: 'white' }}
+                          htmlFor='contactNumber'
+                        >
+                          Contact
+                        </label>
                         <input
                           type='number'
                           id='contactNumber'
@@ -363,7 +394,9 @@ function SignUpPage() {
                     </div>
                     <div className='flex-fill pr-3'>
                       <div className='form-group'>
-                        <label style={{color:'white'}} htmlFor='incharge'>In Charge</label>
+                        <label style={{ color: 'white' }} htmlFor='incharge'>
+                          In Charge
+                        </label>
                         <input
                           type='text'
                           id='incharge'
@@ -394,7 +427,9 @@ function SignUpPage() {
                     </div>
                     <div className='flex-fill '>
                       <div className='form-group'>
-                        <label style={{color:'white'}} htmlFor='web'>Web Link</label>
+                        <label style={{ color: 'white' }} htmlFor='web'>
+                          Web Link
+                        </label>
                         <input
                           type='text'
                           id='web'
@@ -411,7 +446,12 @@ function SignUpPage() {
                   <div className='d-flex align-items-center justify-content-center'>
                     <div className='flex-fill pr-3'>
                       <div className='form-group'>
-                        <label style={{color:'white'}} htmlFor='totalAffected'>Affected</label>
+                        <label
+                          style={{ color: 'white' }}
+                          htmlFor='totalAffected'
+                        >
+                          Affected
+                        </label>
                         <input
                           type='number'
                           id='totalAffected'
@@ -442,7 +482,12 @@ function SignUpPage() {
                     </div>
                     <div className='flex-fill pr-3'>
                       <div className='form-group'>
-                        <label style={{color:'white'}} htmlFor='totalRecovered'>Recovered</label>
+                        <label
+                          style={{ color: 'white' }}
+                          htmlFor='totalRecovered'
+                        >
+                          Recovered
+                        </label>
                         <input
                           type='number'
                           id='totalRecovered'
@@ -473,7 +518,9 @@ function SignUpPage() {
                     </div>
                     <div className='flex-fill'>
                       <div className='form-group'>
-                        <label style={{color:'white'}} htmlFor='totalDeaths'>Deaths</label>
+                        <label style={{ color: 'white' }} htmlFor='totalDeaths'>
+                          Deaths
+                        </label>
                         <input
                           type='number'
                           id='totalDeaths'

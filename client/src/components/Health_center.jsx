@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import { Doughnut, Bar } from 'react-chartjs-2';
 import Loading from './loading/loading.jsx';
 import GetAllDiseases from '../api/diseases/getAllDiseases';
+import GetAllAnimalCases from '../api/animalCase/getAllAnimalCases';
+import GetAllHumanCases from '../api/humanCases/getAllhumanCase';
+// import GetAllHealthCenters from '../api/healthCenters/getAllhealthCenter';
+import GetAllOutbreaks from '../api/outBreaks/getAlloutbreaks';
+import ReportMap from './map.jsx';
 
 var sectionStyle = {
   backgroundColor: '#f2e6cb',
@@ -16,6 +21,10 @@ var sectionStyle = {
 class Health_center extends Component {
   state = {
     diseases: [],
+    animalCases: [],
+    humanCases: [],
+    outbreaks: [],
+    // healthCenters: [],
     user: {},
     barChart: [],
     overAllError: '',
@@ -30,8 +39,72 @@ class Health_center extends Component {
       this.setState({ loading: true });
       GetAllDiseases()
         .then((response) => {
-          this.setState({ diseases: response.data, overAllError: '' });
-          this.setState({ loading: false });
+          GetAllAnimalCases()
+            .then((responses) => {
+              GetAllHumanCases()
+                .then((responses) => {
+                  GetAllOutbreaks()
+                    .then((responses) => {
+                      this.setState({ outbreaks: responses.data });
+                    })
+                    .catch((err) => {
+                      this.setState({ overAllError: "Can't able to fetch!" });
+                      this.setState({ loading: false });
+                    });
+                  if (user.email === 'admin@gmail.com') {
+                    // GetAllHealthCenters()
+                    //   .then((responses) => {
+                    //     this.setState({
+                    //       healthCenters: responses.data,
+                    //       overAllError: '',
+                    //     });
+                    //   })
+                    //   .catch((err) => {
+                    //     this.setState({ overAllError: "Can't able to fetch!" });
+                    //     this.setState({ loading: false });
+                    //   });
+
+                    this.setState({
+                      humanCases: responses.data,
+                      overAllError: '',
+                    });
+                  } else {
+                    this.setState({
+                      humanCases: responses.data.filter(
+                        (humanCase) =>
+                          user.email === humanCase.healthCenter.email
+                      ),
+                      overAllError: '',
+                    });
+                  }
+                })
+                .catch((err) => {
+                  this.setState({ overAllError: "Can't able to fetch!" });
+                  this.setState({ loading: false });
+                });
+              if (user.email === 'admin@gmail.com') {
+                this.setState({
+                  animalCases: responses.data,
+                  overAllError: '',
+                });
+              } else {
+                this.setState({
+                  animalCases: responses.data.filter(
+                    (animalCase) => user.email === animalCase.healthCenter.email
+                  ),
+                  overAllError: '',
+                });
+              }
+            })
+            .catch((err) => {
+              this.setState({ overAllError: "Can't able to fetch!" });
+              this.setState({ loading: false });
+            });
+          this.setState({
+            diseases: response.data,
+            overAllError: '',
+            loading: false,
+          });
         })
         .catch((err) => {
           this.setState({ overAllError: "Can't able to fetch!" });
@@ -72,62 +145,107 @@ class Health_center extends Component {
               {user.email === 'admin@gmail.com' ? (
                 ''
               ) : (
-                <div className='row'>
-                  <div
-                    style={{
-                      height: '50%',
-                      justifyContent: 'center',
-                      paddingLeft: '5%',
-                    }}
-                    className='col-sm-6'
-                  >
-                    <Bar
-                      data={{
-                        labels: ['Infected', 'Recovered', 'Deaths'],
-                        datasets: [
-                          {
-                            label: 'People',
-                            borderWidth: 2,
-                            backgroundColor: [
-                              'rgba(0, 0, 255, 0.5)',
-                              'rgba(0, 255, 0, 0.5)',
-                              'rgba(255, 0, 0, 0.5)',
-                            ],
-                            hoverBackgroundColor: ['blue', 'green', 'red'],
-                            position: 'center',
-                            data: [
-                              this.state.user.total_affected,
-                              this.state.user.total_recovered,
-                              this.state.user.total_deaths,
-                            ],
+                <div className='container-fluid p-0'>
+                  <div className='row'>
+                    <div
+                      style={{
+                        height: '50%',
+                        justifyContent: 'center',
+                      }}
+                      className='col-sm-6 pl-4'
+                    >
+                      <Bar
+                        data={{
+                          labels: ['Infected', 'Recovered', 'Deaths'],
+                          datasets: [
+                            {
+                              label: 'People',
+                              borderWidth: 2,
+                              backgroundColor: [
+                                'rgba(0, 0, 255, 0.5)',
+                                'rgba(0, 255, 0, 0.5)',
+                                'rgba(255, 0, 0, 0.5)',
+                              ],
+                              hoverBackgroundColor: ['blue', 'green', 'red'],
+                              position: 'center',
+                              data: [
+                                this.state.user.total_affected,
+                                this.state.user.total_recovered,
+                                this.state.user.total_deaths,
+                              ],
+                            },
+                          ],
+                        }}
+                        options={{
+                          title: {
+                            display: true,
+                            position: 'top',
+                            text: `HEALTH CENTER : ${this.state.user.name} Status`,
+                            fontSize: '20',
+                            fontColor: 'black',
                           },
-                        ],
-                      }}
-                      options={{
-                        title: {
-                          display: true,
-                          position: 'top',
-                          text: `HEALTH CENTER : ${this.state.user.name} Status`,
-                          fontSize: '20',
-                          fontColor: 'black',
-                        },
-                        legend: {
-                          display: false,
-                          position: 'right',
-                        },
-                      }}
-                    />
+                          legend: {
+                            display: false,
+                            position: 'right',
+                          },
+                        }}
+                      />
+                    </div>
                   </div>
                 </div>
               )}
             </div>
+            <div className='row'>
+              <div
+                style={{
+                  height: '50%',
+                  justifyContent: 'center',
+                }}
+                className='col-sm-6 pl-4'
+              >
+                <ReportMap
+                  type='Animal-Human Cases'
+                  list={this.state.animalCases}
+                  list1={this.state.humanCases}
+                />
+
+                {/* {this.state.user.email === 'admin@gmail.com' ? (
+                  <div className='row'>
+                    <div
+                      className='col-sm-12 pt-1'
+                      style={{
+                        height: '50%',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <ReportMap
+                        type='healthcenters'
+                        list={this.state.healthcenters}
+                      />
+                    </div>
+                  </div>
+                ) : null} */}
+              </div>
+              <div
+                style={{
+                  height: '50%',
+                  justifyContent: 'center',
+                }}
+                className='col-sm-6 pl-4'
+              >
+                <ReportMap
+                  type='Outbreak Regions'
+                  list={this.state.outbreaks}
+                />
+              </div>
+            </div>
             <div className='container-fluid p-0'>
               <div className='row p-4'>
                 <div
-                  className='btn-group'
+                  className='btn-group pl-4'
                   role='group'
                   aria-label='First group'
-                  style={{ paddingLeft: '5%', height: '2%' }}
+                  style={{ height: '2%' }}
                 >
                   {user.email === 'admin@gmail.com' ? (
                     <a
@@ -137,20 +255,19 @@ class Health_center extends Component {
                       HEALTH CENTERS
                     </a>
                   ) : (
-                    <div>
-                      <a
-                        className='btn btn-large btn-dark'
-                        href='/new_humancase'
-                      >
-                        NEW HUMAN CASE
-                      </a>
-                      <a
-                        className='btn btn-large btn-dark'
-                        href='/new_animalcase'
-                      >
-                        NEW ANIMAL CASE
-                      </a>
-                    </div>
+                    <a className='btn btn-large btn-dark' href='/new_humancase'>
+                      NEW HUMAN CASE
+                    </a>
+                  )}
+                  {user.email === 'admin@gmail.com' ? (
+                    ''
+                  ) : (
+                    <a
+                      className='btn btn-large btn-dark'
+                      href='/new_animalcase'
+                    >
+                      NEW ANIMAL CASE
+                    </a>
                   )}
 
                   <a className='btn btn-large btn-dark' href='/human_case'>
@@ -159,11 +276,6 @@ class Health_center extends Component {
                   <a className='btn btn-large btn-dark' href='/animal_case'>
                     ANIMAL CASES
                   </a>
-                  {user.email === 'admin@gmail.com' ? (
-                    <a className='btn btn-large btn-dark' href='/admin'>
-                      NOTIFY ANIMAL OWNERS
-                    </a>
-                  ) : null}
                 </div>
               </div>
             </div>

@@ -180,6 +180,11 @@ function NewHumanCase() {
         precautions: 'No Suggested precautions',
         morbidity: Math.floor(10 + Math.random() * 90),
         mortality: Math.floor(10 + Math.random() * 90),
+        diagnosis: [
+          'Microscopy',
+          'Electron microscopy',
+          'Measurement of antibody titers in host sera',
+        ],
         total_affected: Math.floor(1000 + Math.random() * 9000),
         total_deaths: Math.floor(100 + Math.random() * 900),
         total_recovered: Math.floor(1000 + Math.random() * 9000),
