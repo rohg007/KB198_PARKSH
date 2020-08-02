@@ -64,10 +64,29 @@
         android:textSize="16sp" />
 
     <TextView
+        android:id="@+id/dist_label"
+        android:text="Dist from your location: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/incharge_content_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="8dp"/>
+
+    <TextView
+        android:id="@+id/cur_dist_tv"
+        android:text="x km away "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/incharge_content_tv"
+        app:layout_constraintStart_toEndOf="@id/dist_label"
+        android:layout_margin="8dp"/>
+
+    <TextView
         android:id="@+id/affected_content_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/incharge_content_label"
+        app:layout_constraintTop_toBottomOf="@id/cur_dist_tv"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/deaths_content_label"
         android:text="Cases"
@@ -79,7 +98,7 @@
         android:id="@+id/deaths_content_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/incharge_content_label"
+        app:layout_constraintTop_toBottomOf="@id/dist_label"
         app:layout_constraintLeft_toRightOf="@id/affected_content_label"
         app:layout_constraintRight_toLeftOf="@id/recovered_content_label"
         android:text="Deaths"
@@ -91,7 +110,7 @@
         android:id="@+id/recovered_content_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/incharge_content_label"
+        app:layout_constraintTop_toBottomOf="@id/dist_label"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toRightOf="@id/deaths_content_label"
         android:text="Recovered"

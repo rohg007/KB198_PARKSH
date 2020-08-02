@@ -13,6 +13,14 @@ var vaccineSchema = new Schema({
     type: Number,
     required: true,
   },
+  flag: {
+    type: Boolean,
+    required: true,
+  },
+  totalInCluster: {
+    type: Number,
+    required: true,
+  },
   forHuman: {
     type: String,
   },
@@ -56,6 +64,9 @@ var diseaseSchema = new Schema({
   total_deaths: {
     type: Number,
     required: true,
+  },
+  diagnosis: {
+    type: [String],
   },
   livestock: [livestockSchema],
   vaccine: [vaccineSchema],

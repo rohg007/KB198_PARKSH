@@ -36,5 +36,19 @@ public class MyApp extends Application {
             }
             notificationManager.createNotificationChannel(notificationChannel);
         }
+
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
+            NotificationChannel notificationChannel = new NotificationChannel(Constants.ANIMAL_CHANNEL_ID, "Animal Outbreak Notifications", NotificationManager.IMPORTANCE_HIGH);
+            notificationChannel.setVibrationPattern(new long[]{300, 300, 300});
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            if (defaultSoundUri != null) {
+                AudioAttributes att = new AudioAttributes.Builder()
+                        .setUsage(AudioAttributes.USAGE_NOTIFICATION)
+                        .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                        .build();
+                notificationChannel.setSound(defaultSoundUri, att);
+            }
+            notificationManager.createNotificationChannel(notificationChannel);
+        }
     }
 }

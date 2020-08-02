@@ -154,6 +154,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 return true;
             } else if(actionItem.getId() == R.id.view_health_centers){
                 Intent intent = new Intent(MapsActivity.this, HealthCentersActivity.class);
+                intent.putExtra("LOCATION", lastLocation);
                 startActivity(intent);
                 return true;
             } else if(actionItem.getId() == R.id.diagnose_self){
@@ -314,10 +315,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private void drawGeofenceCircles(){
         for(int i=0;i<outbreaks.size();i++){
             CircleOptions circleOptions = new CircleOptions()
-                    .center( outbreaks.get(i).getLatlng())
-                    .strokeColor(Color.argb(50, 70,70,70))
-                    .fillColor( Color.argb(100, 255,0,0) )
-                    .radius( 1000.0 );
+                        .center(outbreaks.get(i).getLatlng())
+                        .strokeColor(Color.argb(50, 70, 70, 70))
+                        .fillColor(Color.argb(100, 255, 0, 0))
+                        .radius(1000.0);
+            if(outbreaks.get(i).getFlag()) {
+                circleOptions.fillColor(Color.argb(100, 0, 0, 255));
+            }
             Circle circle = googleMap.addCircle(circleOptions);
             circle.setClickable(true);
             circle.setTag(outbreaks.get(i));

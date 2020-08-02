@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +21,9 @@ import com.rohg007.android.diseasex.models.HealthCenter;
 import com.rohg007.android.diseasex.viewmodels.HealthCenterViewModel;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Map;
 
 public class HealthCentersActivity extends AppCompatActivity {
 
@@ -34,6 +39,8 @@ public class HealthCentersActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
+        Location location = getIntent().getParcelableExtra("LOCATION");
+
         HealthCenterViewModel healthCenterViewModel = ViewModelProviders.of(this).get(HealthCenterViewModel.class);
         healthCenterViewModel.init();
 
@@ -42,7 +49,26 @@ public class HealthCentersActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        healthCenterAdapter = new HealthCenterAdapter(this, healthCenterArrayList);
+        Collections.sort(healthCenterArrayList, new Comparator<HealthCenter>() {
+            public int compare(HealthCenter o1,
+                               HealthCenter o2) {
+                Location temp = new Location(LocationManager.GPS_PROVIDER);
+                temp.setLatitude(o1.getLatlng().latitude);
+                temp.setLongitude(o1.getLatlng().longitude);
+                Location temp1 = new Location(LocationManager.GPS_PROVIDER);
+                temp.setLatitude(o2.getLatlng().latitude);
+                temp.setLongitude(o2.getLatlng().longitude);
+                float dist = location.distanceTo(temp);
+                float dist1 = location.distanceTo(temp1);
+                if(dist<dist1)
+                    return 1;
+                else if(dist>dist1)
+                    return -1;
+                else
+                    return 0;
+            }
+        });
+        healthCenterAdapter = new HealthCenterAdapter(this, healthCenterArrayList, location);
         recyclerView.setAdapter(healthCenterAdapter);
 
         healthCenterViewModel.getDiseaseRepository().observe(this, responseData ->{
