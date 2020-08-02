@@ -153,9 +153,10 @@ class Health_center extends Component {
                       style={{
                         height: '50%',
                         justifyContent: 'center',
+                        backgroundColor: 'white',
+                        margin: '2%',
                       }}
                       className='col-sm-6 pl-4'
-                      style={{ backgroundColor: 'white', margin: '2%' }}
                     >
                       <Bar
                         data={{
@@ -365,14 +366,14 @@ class Health_center extends Component {
                 marginBottom: '1rem',
               }}
             >
-              <a
+              <div
                 className='btn btn-large btn-dark'
                 style={{
                   textAlign: 'center',
                 }}
               >
                 <h2>DISEASES</h2>
-              </a>
+              </div>
             </div>
 
             <div className='container-fluid p-0'>

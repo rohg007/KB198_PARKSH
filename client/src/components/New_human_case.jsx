@@ -287,10 +287,10 @@ function NewHumanCase() {
               }}
               className='d-flex align-items-center justify-content-center'
             >
-              <Loading />
+              <Loading loadingColor='#ff790e' />
             </div>
           ) : (
-            <div className='d-flex align-items-center justify-content-center'>
+            <div className='d-flex align-items-center justify-content-center pt-4'>
               <div
                 className='card'
                 body='true'
@@ -496,7 +496,7 @@ function NewHumanCase() {
                           </div>
                         ) : null}
                       </div>
-                      <div className='pb-3' style={{ width: '70%' }}>
+                      <div className='pb-3' style={{ width: '50%' }}>
                         <Dropdown
                           label='Status'
                           hasError={error.statusError}
