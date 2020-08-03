@@ -58,9 +58,6 @@ var diseaseSchema = new Schema({
   total_recovered: {
     type: Number,
   },
-  diagnosis: {
-    type: [String],
-  },
   livestock: [livestockSchema],
   vaccine: [vaccineSchema],
 });
