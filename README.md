@@ -5,18 +5,19 @@ Evaluation Repository for Team Parksh [KB198] for SIH2020
 A lot of havoc is created whenever an outbreak occurs in any area. Lots of people are infected and some have to give the toll of their life.
 If we can know beforehand and take measures on a small scale, maybe we can prevent a disaster. Hence there's <b>DiseaseX</b>. <b>DiseaseX</b> is one stop unified consolidated <b>Disease Reporting System</b> that integrates the following stakeholders:
 <li> Health Centers
+  
+   ## Web DashBoard WalkThrough
+    <ol>
+      <h2>Brief View of How the User navigates</h2>
+        Visit https://drive.google.com/file/d/1SmojEhYE01Lty-WIEWnnhUVwQQmkQ8Pk/view?usp=sharing for viewing the walkthrough
+      <h2>Notifications sent to the patients on vaccinations due date</h2>
+      <img src="https://github.com/rohg007/KB198_PARKSH/blob/master/Screenshots/vaccine_notifications.png" alt="Vaccine Notification" width="200" height="320">
+    </ol>
+  ## How to Run
+    React Web Dashboard is deployed on firebase cloud and can be directly accessed by visiting https://sihfinal-23cee.web.app/
+    
 <li> General Public
-## Web DashBoard WalkThrough
-  <ol>
-    <h2>Brief View of How the User navigates</h2>
-      Visit https://drive.google.com/file/d/1SmojEhYE01Lty-WIEWnnhUVwQQmkQ8Pk/view?usp=sharing for viewing the walkthrough
-    <h2>Notifications sent to the patients on vaccinations due date</h2>
-    <img src="https://github.com/rohg007/KB198_PARKSH/blob/master/Screenshots/vaccine_notifications.png" alt="Vaccine Notification" width="200" height="320">
-  </ol>
-## How to Run
-
-React Web Dashboard is deployed on firebase cloud and can be directly accessed by visiting https://sihfinal-23cee.web.app/
-
+  
 ## Key Features
 
 <ol> 
