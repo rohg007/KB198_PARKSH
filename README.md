@@ -8,8 +8,8 @@ If we can know beforehand and take measures on a small scale, maybe we can preve
 <li> General Public
 ## Web DashBoard WalkThrough
   <ol>
-    <h2>Brief View of how the user navigates</h2>
-    <img src="https://github.com/rohg007/KB198_PARKSH/blob/master/Screenshots/web_DashboardWalkthrough.mp4" alt="Web Dashboard Walkthrough video" width="320" height="250">
+    <h2>Brief View of How the User navigates</h2>
+      Visit https://drive.google.com/file/d/1SmojEhYE01Lty-WIEWnnhUVwQQmkQ8Pk/view?usp=sharing for viewing the walkthrough
     <h2>Notifications sent to the patients on vaccinations due date</h2>
     <img src="https://github.com/rohg007/KB198_PARKSH/blob/master/Screenshots/vaccine_notifications.png" alt="Vaccine Notification" width="200" height="320">
   </ol>
