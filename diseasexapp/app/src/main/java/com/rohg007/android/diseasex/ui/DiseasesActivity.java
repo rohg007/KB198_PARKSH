@@ -34,7 +34,7 @@ public class DiseasesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diseases);
         if(getSupportActionBar()!=null) {
-            getSupportActionBar().setTitle("Diseases");
+            getSupportActionBar().setTitle(R.string.diseases);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         diseaseViewModel = ViewModelProviders.of(this).get(DiseaseViewModel.class);

@@ -3,7 +3,7 @@
     <string name="title_activity_maps">Map</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="intro_string">Please enter the following details so that we can notify you on the following channels. The info you enter here doesn\'t reach us by any means</string>
     <string name="menu_diagnosis">Diagnose Yourself</string>
     <string name="diagnose_info">This space helps you diagnose yourself to the diseases existing in our database</string>
@@ -39,4 +39,42 @@
     <string name="risk_alert">You are running at high risk, we highly recommend you to approach the nearest health center and get yourself diagnosed throughly.</string>
     <string name="animal_outbreak">Animal Outbreak</string>
     <string name="human_outbreak">Human Outbreak</string>
+    <string name="update_notification_details">Update Notification Details</string>
+    <string name="view_diseases">View Diseases</string>
+    <string name="view_health_centers">View Health Centers</string>
+    <string name="view_outbreak_details">View Outbreak Details</string>
+    <string name="welcome_to_diseasex">Welcome to DiseaseX</string>
+    <string name="submit">SUBMIT</string>
+    <string name="email">Email</string>
+    <string name="phone">Phone</string>
+    <string name="diseases">Diseases</string>
+    <string name="morbidity">Morbidity</string>
+    <string name="mortality">Mortality</string>
+    <string name="disease_name">Disease Name:</string>
+    <string name="scientific_name">Scientific Name:</string>
+    <string name="number_of_people_affected">Number of People Affected:</string>
+    <string name="number_of_deaths">Number of Deaths:</string>
+    <string name="symptoms">Symptoms</string>
+    <string name="precautions">Precautions</string>
+    <string name="address">Address:</string>
+    <string name="center_incharge">Center Incharge:</string>
+    <string name="dist_from_your_location">Dist from your location:</string>
+    <string name="cases">Cases</string>
+    <string name="deaths">Deaths</string>
+    <string name="recovered">Recovered</string>
+    <string name="web">Web</string>
+    <string name="call">Call</string>
+    <string name="outbreaks">Outbreaks</string>
+    <string name="kms_away">Kms Away</string>
+    <string name="livestock_affected">Livestocks Affected</string>
+    <string name="vaccinations">Vaccinations</string>
+    <string name="center_name">Center Name:</string>
+    <string name="outbreak_area">Outbreak Area</string>
+    <string name="call_health_center">CALL HEALTH CENTER</string>
+    <string name="associated_health_center">Associated Health Center</string>
+    <string name="past_outbreaks">Past Outbreaks</string>
+    <string name="view_past_outbreaks">View Past Outbreaks</string>
+    <string name="locate_on_map">Locate on map</string>
+    <string name="nearest_health_centers">Nearest Health Centers</string>
+    <string name="locate_nearest">Locate Nearest</string>
 </resources>

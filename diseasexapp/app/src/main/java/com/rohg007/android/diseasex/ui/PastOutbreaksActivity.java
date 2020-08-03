@@ -1,6 +1,5 @@
 package com.rohg007.android.diseasex.ui;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,37 +16,35 @@ import android.widget.ProgressBar;
 import com.google.android.gms.maps.GoogleMap;
 import com.rohg007.android.diseasex.R;
 import com.rohg007.android.diseasex.adapters.OutbreakAdapter;
-import com.rohg007.android.diseasex.models.HealthCenter;
-import com.rohg007.android.diseasex.models.NamedLocations;
 import com.rohg007.android.diseasex.models.Outbreak;
 import com.rohg007.android.diseasex.viewmodels.OutbreakViewModel;
+import com.rohg007.android.diseasex.viewmodels.PastOutbreakViewModel;
 
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class OubreaksActivity extends AppCompatActivity {
+public class PastOutbreaksActivity extends AppCompatActivity {
 
     private ArrayList<Outbreak> outbreaks = new ArrayList<>();
-    private OutbreakViewModel outbreakViewModel;
+    private PastOutbreakViewModel outbreakViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_oubreaks);
-        
+        setContentView(R.layout.activity_past_outbreaks);
+
         if(getSupportActionBar()!=null){
-            getSupportActionBar().setTitle(R.string.outbreaks);
+            getSupportActionBar().setTitle(R.string.past_outbreaks);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-
         Location location = getIntent().getParcelableExtra("LOCATION");
 
-        outbreakViewModel = ViewModelProviders.of(this).get(OutbreakViewModel.class);
+        outbreakViewModel = ViewModelProviders.of(this).get(PastOutbreakViewModel.class);
         outbreakViewModel.init();
 
-        RecyclerView outbreakRecyclerView = findViewById(R.id.outbreak_rv);
-        ProgressBar progressBar = findViewById(R.id.outbreaks_pb);
+        RecyclerView outbreakRecyclerView = findViewById(R.id.past_outbreak_rv);
+        ProgressBar progressBar = findViewById(R.id.past_outbreaks_pb);
 
         OutbreakAdapter outbreakAdapter = new OutbreakAdapter(outbreaks,this, location);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);

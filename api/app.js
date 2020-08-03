@@ -20,6 +20,7 @@ var animalCaseRouter = require('./routes/animalCaseRouter');
 var diseaseRouter = require('./routes/diseaseRouter');
 var humanCaseRouter = require('./routes/humanCaseRouter');
 var outbreakRouter = require('./routes/outbreakRouter');
+var pastOutbreakRouter = require('./routes/pastOutbreakRouter');
 var cors = require('cors');
 
 const app = express();
@@ -61,6 +62,7 @@ app.use('/animalCases', animalCaseRouter);
 app.use('/diseases', diseaseRouter);
 app.use('/humanCases', humanCaseRouter);
 app.use('/outbreaks', outbreakRouter);
+app.use('/pastOutbreaks', pastOutbreakRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

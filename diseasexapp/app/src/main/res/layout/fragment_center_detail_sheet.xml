@@ -53,7 +53,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Center Name: "
+                android:text="@string/center_name"
                 android:textColor="#444"
                 android:textStyle="bold" />
 
@@ -70,7 +70,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Center Incharge: "
+                android:text="@string/center_incharge"
                 android:textColor="#444"
                 android:textStyle="bold" />
 
@@ -85,7 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Outbreak Area"
+            android:text="@string/outbreak_area"
             android:textColor="#444"
             android:textStyle="bold" />
 
@@ -99,7 +99,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Email"
+            android:text="@string/email"
             android:textColor="#444"
             android:textStyle="bold" />
 
@@ -115,7 +115,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:textColor="#444"
-            android:text="Precautions"
+            android:text="@string/precautions"
             android:textStyle="bold"/>
 
         <TextView
@@ -130,7 +130,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:textColor="#444"
-            android:text="Symptoms"
+            android:text="@string/symptoms"
             android:textStyle="bold"/>
 
         <TextView
@@ -146,7 +146,7 @@
             android:layout_marginTop="30dp"
             android:background="#000"
             android:foreground="?attr/selectableItemBackground"
-            android:text="CALL HEALTH CENTER"
+            android:text="@string/call_health_center"
             android:textColor="#fff" />
 
     </LinearLayout>

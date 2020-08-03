@@ -3,6 +3,8 @@ package com.rohg007.android.diseasex.ui;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
@@ -30,6 +32,8 @@ public class OutbreakDetailActivity extends AppCompatActivity implements OnMapRe
     TextView affectedContent;
     TextView deathsContent;
     TextView recoveredContent;
+    TextView symptomsLivestockTv;
+    TextView precautionsVaccinationTv;
     Button webContentButton;
     Button phoneContentButton;
     Button emailContentButton;
@@ -45,6 +49,7 @@ public class OutbreakDetailActivity extends AppCompatActivity implements OnMapRe
 
         Bundle bundle = getIntent().getExtras();
         outbreak = bundle.getParcelable("OUTBREAK");
+        Location location = getIntent().getParcelableExtra("LOCATION");
         TextView diseaseNameTv = findViewById(R.id.disease_name_outbreak_detail);
         TextView scientificNameTv = findViewById(R.id.scientific_name_outbreak_detail);
         TextView morbidityTv = findViewById(R.id.morbidity_outbreak_detail);
@@ -61,7 +66,20 @@ public class OutbreakDetailActivity extends AppCompatActivity implements OnMapRe
         phoneContentButton = findViewById(R.id.call_content_button);
         emailContentButton = findViewById(R.id.email_content_button);
         mapView = findViewById(R.id.outbreak_detail_map);
+        symptomsLivestockTv = findViewById(R.id.symptomsLivestockTv);
+        precautionsVaccinationTv = findViewById(R.id.precautionsVaccineTv);
+        TextView distTv = findViewById(R.id.cur_dist_tv);
 
+        Location temp = new Location(LocationManager.GPS_PROVIDER);
+        temp.setLatitude(healthCenter.getLatlng().latitude);
+        temp.setLongitude(healthCenter.getLatlng().longitude);
+        float dist = currLocation.distanceTo(temp);
+        dist/=1000;
+        holder.distTextView.setText(Math.floor(dist) + " "+"Kms Away");
+
+        centerNameContent.setTextSize(16);
+        symptomsTv.setTextSize(16);
+        precautionsTv.setTextSize(16);
         if(mapView!=null){
             mapView.onCreate(null);
             mapView.getMapAsync(this);
@@ -98,11 +116,33 @@ public class OutbreakDetailActivity extends AppCompatActivity implements OnMapRe
             startActivity(i);
         });
 
-        String[] symptoms = outbreak.getDisease().getSymptoms().split(",");
-        symptomsTv.setText(Html.fromHtml(Formatters.bulletedString(symptoms)));
+        if(outbreak.getFlag()){
+            symptomsLivestockTv.setText(R.string.livestock_affected);
+            int n = outbreak.getDisease().getLivestock().size();
+            String[] livestocks = new String[n];
+            for(int i=0;i<n;i++)
+                livestocks[i] = outbreak.getDisease().getLivestock().get(i).getBreed();
+            String formattedLivestock = Formatters.bulletedString(livestocks);
+            symptomsTv.setText(Html.fromHtml(formattedLivestock));
+        } else {
+            String[] precautions = outbreak.getDisease().getPrecautions().split(",");
+            String formattedPrecautions = Formatters.bulletedString(precautions);
+            precautionsTv.setText(Html.fromHtml(formattedPrecautions));
+        }
 
-        String[] precautions = outbreak.getDisease().getPrecautions().split(",");
-        precautionsTv.setText(Html.fromHtml(Formatters.bulletedString(precautions)));
+        if(outbreak.getFlag()){
+            precautionsVaccinationTv.setText(R.string.vaccinations);
+            int n = outbreak.getDisease().getVaccine().size();
+            String[] vaccines = new String[n];
+            for(int i=0;i<n;i++)
+                vaccines[i] = outbreak.getDisease().getVaccine().get(i).getName()+", vaccination duration within "+outbreak.getDisease().getVaccine().get(i).getDuration()+" Days";
+            String formattedVaccines = Formatters.bulletedString(vaccines);
+            precautionsTv.setText(Html.fromHtml(formattedVaccines));
+        } else {
+            String[] symptoms = outbreak.getDisease().getSymptoms().split(",");
+            String formattedSymptoms = Formatters.bulletedString(symptoms);
+            symptomsTv.setText(Html.fromHtml(formattedSymptoms));
+        }
     }
 
     @Override

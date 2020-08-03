@@ -48,7 +48,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
-                    android:text="Morbidty"
+                    android:text="@string/morbidity"
                     android:textColor="@android:color/white"
                     android:padding="8dp"/>
 
@@ -75,7 +75,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:text="Mortality"
+                android:text="@string/mortality"
                 android:textColor="@android:color/white"
                 android:padding="8dp"/>
 
@@ -113,9 +113,10 @@
             android:orientation="vertical">
 
         <TextView
+            android:id="@+id/symptomsLivestockTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Symptoms"
+            android:text="@string/symptoms"
             android:textSize="16sp"
             android:textColor="#444"
             android:textStyle="bold"/>
@@ -148,9 +149,10 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/precautionsVaccineTv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Precautions"
+                android:text="@string/precautions"
                 android:textSize="16sp"
                 android:textColor="#444"
                 android:textStyle="bold"/>
@@ -185,7 +187,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Associated Health Center"
+                android:text="@string/associated_health_center"
                 android:textSize="16sp"
                 android:textColor="#444"
                 android:textStyle="bold"/>

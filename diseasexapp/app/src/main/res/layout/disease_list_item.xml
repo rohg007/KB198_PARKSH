@@ -85,7 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Morbidity"
+            android:text="@string/morbidity"
             style="@style/TextAppearance.MaterialComponents.Overline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/morbidity_indicator" />
@@ -95,7 +95,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:layout_marginStart="4dp"
-            android:text="Mortality"
+            android:text="@string/mortality"
             style="@style/TextAppearance.MaterialComponents.Overline"
             app:layout_constraintStart_toStartOf="@id/mortality_indicator"
             app:layout_constraintTop_toBottomOf="@id/mortality_indicator"

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
+var uniqueValidator = require('mongoose-unique-validator');
 const Schema = mongoose.Schema;
-
 var vaccineSchema = new Schema({
   name: {
     type: String,
@@ -15,12 +15,13 @@ var vaccineSchema = new Schema({
   },
   forHuman: {
     type: String,
-  },
+  }
 });
 
 var livestockSchema = new Schema({
   breed: {
     type: String,
+    required: true,
   },
   population: {
     type: Number,
@@ -50,12 +51,11 @@ var diseaseSchema = new Schema({
   },
   total_affected: {
     type: Number,
+    required: true,
   },
   total_deaths: {
     type: Number,
-  },
-  total_recovered: {
-    type: Number,
+    required: true,
   },
   livestock: [livestockSchema],
   vaccine: [vaccineSchema],
@@ -64,7 +64,6 @@ var diseaseSchema = new Schema({
 var healthCenterSchema = new Schema({
   address: {
     type: String,
-    required: true,
   },
   email: {
     type: String,
@@ -94,12 +93,10 @@ var healthCenterSchema = new Schema({
   },
   pincode: {
     type: String,
-    required: true,
   },
   web: {
     type: String,
   },
-
   total_affected: {
     type: Number,
     required: true,
@@ -114,30 +111,16 @@ var healthCenterSchema = new Schema({
   },
 });
 
-var humanCaseSchema = new Schema({
-  status: {
-    type: String,
-    required: true,
+var pastOutbreakSchema = new Schema({
+  disease: {
+    type: diseaseSchema,
   },
-  patientName: {
-    type: String,
-    required: true,
+  healthCenter: {
+    type: healthCenterSchema,
   },
-  patientAddress: {
+  radius: {
     type: String,
-    required: true,
-  },
-  patientEmail: {
-    type: String,
-    required: true,
-  },
-  patientContact: {
-    type: String,
-    required: true,
-  },
-  pincode: {
-    type: String,
-    required: true,
+    unique: true,
   },
   lat: {
     type: String,
@@ -145,15 +128,20 @@ var humanCaseSchema = new Schema({
   lng: {
     type: String,
   },
-  disease: {
-    type: diseaseSchema,
+  deaths: {
+    type: Number,
   },
-  healthCenter: {
-    type: healthCenterSchema,
+  affected: {
+    type: Number,
   },
-  date: {
-    type: String,
+  flag: {
+    type: Boolean,
+    required: true,
   },
+  totalInCluster: {
+    type: Number,
+    required: true,
+  }
 });
-
-module.exports = mongoose.model('HumanCase', humanCaseSchema);
+pastOutbreakSchema.plugin(uniqueValidator);
+module.exports = mongoose.model('PastOutbreak', pastOutbreakSchema);

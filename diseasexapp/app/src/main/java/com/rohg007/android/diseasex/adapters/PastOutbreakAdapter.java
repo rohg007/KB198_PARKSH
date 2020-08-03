@@ -21,7 +21,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.rohg007.android.diseasex.R;
-import com.rohg007.android.diseasex.models.NamedLocations;
 import com.rohg007.android.diseasex.models.Outbreak;
 import com.rohg007.android.diseasex.ui.OutbreakDetailActivity;
 
@@ -32,12 +31,12 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class OutbreakAdapter extends RecyclerView.Adapter<OutbreakAdapter.ViewHolder> {
+public class PastOutbreakAdapter extends RecyclerView.Adapter<PastOutbreakAdapter.ViewHolder> {
     private ArrayList<Outbreak> outbreaks;
     private Context context;
     private Location currLocation;
 
-    public OutbreakAdapter(ArrayList<Outbreak> outbreaks, Context context, Location currLocation) {
+    public PastOutbreakAdapter(ArrayList<Outbreak> outbreaks, Context context, Location currLocation) {
         super();
         this.outbreaks = outbreaks;
         this.context = context;
@@ -46,12 +45,12 @@ public class OutbreakAdapter extends RecyclerView.Adapter<OutbreakAdapter.ViewHo
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.outbreak_list_item,parent,false));
+    public PastOutbreakAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new PastOutbreakAdapter.ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.outbreak_list_item,parent,false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PastOutbreakAdapter.ViewHolder holder, int position) {
         holder.itemView.setOnClickListener(v -> {
             Context context = v.getContext();
             Intent i = new Intent(context, OutbreakDetailActivity.class);
@@ -67,7 +66,7 @@ public class OutbreakAdapter extends RecyclerView.Adapter<OutbreakAdapter.ViewHo
         return outbreaks.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements OnMapReadyCallback{
+    public class ViewHolder extends RecyclerView.ViewHolder implements OnMapReadyCallback {
         private MapView mapView;
         private TextView diseaseNameTv;
         private TextView addressTextView;

@@ -13,17 +13,9 @@ var vaccineSchema = new Schema({
     type: Number,
     required: true,
   },
-  flag: {
-    type: Boolean,
-    required: true,
-  },
-  totalInCluster: {
-    type: Number,
-    required: true,
-  },
   forHuman: {
     type: String,
-  },
+  }
 });
 
 var livestockSchema = new Schema({
@@ -64,9 +56,6 @@ var diseaseSchema = new Schema({
   total_deaths: {
     type: Number,
     required: true,
-  },
-  diagnosis: {
-    type: [String],
   },
   livestock: [livestockSchema],
   vaccine: [vaccineSchema],
@@ -145,6 +134,14 @@ var outbreakSchema = new Schema({
   affected: {
     type: Number,
   },
+  flag: {
+    type: Boolean,
+    required: true,
+  },
+  totalInCluster: {
+    type: Number,
+    required: true,
+  }
 });
 outbreakSchema.plugin(uniqueValidator);
 module.exports = mongoose.model('Outbreak', outbreakSchema);
