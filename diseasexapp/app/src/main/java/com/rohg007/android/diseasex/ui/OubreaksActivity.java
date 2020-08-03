@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,11 +17,14 @@ import android.widget.ProgressBar;
 import com.google.android.gms.maps.GoogleMap;
 import com.rohg007.android.diseasex.R;
 import com.rohg007.android.diseasex.adapters.OutbreakAdapter;
+import com.rohg007.android.diseasex.models.HealthCenter;
 import com.rohg007.android.diseasex.models.NamedLocations;
 import com.rohg007.android.diseasex.models.Outbreak;
 import com.rohg007.android.diseasex.viewmodels.OutbreakViewModel;
 
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class OubreaksActivity extends AppCompatActivity {
 
@@ -33,7 +37,7 @@ public class OubreaksActivity extends AppCompatActivity {
         setContentView(R.layout.activity_oubreaks);
         
         if(getSupportActionBar()!=null){
-            getSupportActionBar().setTitle("Outbreaks");
+            getSupportActionBar().setTitle(R.string.outbreaks);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
@@ -53,7 +57,10 @@ public class OubreaksActivity extends AppCompatActivity {
         outbreakRecyclerView.setRecyclerListener(recyclerListener);
 
         outbreakViewModel.getOutbreakRepository().observe(this, responseData->{
-            outbreaks.addAll(responseData);
+            TreeMap<Double, Outbreak> map = getSortedList(location, responseData);
+            for(Map.Entry<Double, Outbreak> e : map.entrySet()){
+                outbreaks.add(e.getValue());
+            }
             outbreakAdapter.notifyDataSetChanged();
         });
 
@@ -72,6 +79,18 @@ public class OubreaksActivity extends AppCompatActivity {
             mapHolder.googleMap.setMapType(GoogleMap.MAP_TYPE_NONE);
         }
     };
+
+    private TreeMap<Double, Outbreak> getSortedList(Location location, ArrayList<Outbreak> responseData) {
+        TreeMap<Double, Outbreak> map = new TreeMap<>();
+        for(Outbreak o : responseData){
+            Location temp = new Location(LocationManager.GPS_PROVIDER);
+            temp.setLatitude(o.getLatlng().latitude);
+            temp.setLongitude(o.getLatlng().longitude);
+            double dist = location.distanceTo(temp);
+            map.put(dist, o);
+        }
+        return map;
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

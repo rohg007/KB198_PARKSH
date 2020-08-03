@@ -57,7 +57,7 @@ public class HealthCenterAdapter extends RecyclerView.Adapter<HealthCenterAdapte
             temp.setLongitude(healthCenter.getLatlng().longitude);
             float dist = currLocation.distanceTo(temp);
             dist/=1000;
-            holder.distTextView.setText(Double.toString(Math.floor(dist)) + " Kms Away");
+            holder.distTextView.setText(Math.floor(dist) + " "+"Kms Away");
 
             holder.webContentButton.setOnClickListener(v -> {
                 Intent i = new Intent(Intent.ACTION_VIEW);

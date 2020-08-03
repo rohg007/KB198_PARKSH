@@ -7,17 +7,17 @@
     <item
         android:id="@+id/view_diseases"
         android:icon="@drawable/ic_sentiment_dissatisfied_black_24dp"
-        android:title="View Diseases" />
+        android:title="@string/view_diseases" />
 
     <item
         android:id="@+id/view_health_centers"
         android:icon="@drawable/ic_baseline_home_work_24"
-        android:title="View Health Centers" />
+        android:title="@string/view_health_centers" />
 
     <item
         android:id="@+id/view_outbreak"
         android:icon="@drawable/ic_warning_black_24dp"
-        android:title="View Outbreak Details" />
+        android:title="@string/view_outbreak_details" />
 
     <item
         android:id="@+id/diagnose_self"

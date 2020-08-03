@@ -21,7 +21,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Address: "
+        android:text="@string/address"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="8dp"
         android:textSize="16sp"
@@ -46,7 +46,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Center Incharge: "
+        android:text="@string/center_incharge"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="8dp"
         android:textSize="16sp"
@@ -65,7 +65,7 @@
 
     <TextView
         android:id="@+id/dist_label"
-        android:text="Dist from your location: "
+        android:text="@string/dist_from_your_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
@@ -89,7 +89,7 @@
         app:layout_constraintTop_toBottomOf="@id/cur_dist_tv"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/deaths_content_label"
-        android:text="Cases"
+        android:text="@string/cases"
         android:textStyle="bold"
         android:textSize="16sp"
         android:layout_margin="8dp"/>
@@ -101,7 +101,7 @@
         app:layout_constraintTop_toBottomOf="@id/dist_label"
         app:layout_constraintLeft_toRightOf="@id/affected_content_label"
         app:layout_constraintRight_toLeftOf="@id/recovered_content_label"
-        android:text="Deaths"
+        android:text="@string/deaths"
         android:textStyle="bold"
         android:textSize="16sp"
         android:layout_margin="8dp"/>
@@ -113,7 +113,7 @@
         app:layout_constraintTop_toBottomOf="@id/dist_label"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toRightOf="@id/deaths_content_label"
-        android:text="Recovered"
+        android:text="@string/recovered"
         android:textStyle="bold"
         android:textSize="16sp"
         android:layout_margin="8dp"/>
@@ -157,7 +157,7 @@
         app:layout_constraintRight_toLeftOf="@id/call_content_button"
         android:layout_margin="16dp"
         android:background="@color/colorPrimary"
-        android:text="Web"
+        android:text="@string/web"
         android:textColor="@android:color/white"/>
 
     <Button
@@ -167,7 +167,7 @@
         android:layout_margin="16dp"
         android:layout_marginTop="16dp"
         android:background="@color/colorPrimary"
-        android:text="Call"
+        android:text="@string/call"
         android:textColor="@android:color/white"
         app:layout_constraintLeft_toRightOf="@id/check_web_content_button"
         app:layout_constraintRight_toLeftOf="@id/email_content_button"
@@ -180,7 +180,7 @@
         android:layout_margin="16dp"
         android:layout_marginTop="16dp"
         android:background="@color/colorPrimary"
-        android:text="Email"
+        android:text="@string/email"
         android:textColor="@android:color/white"
         app:layout_constraintLeft_toRightOf="@id/call_content_button"
         app:layout_constraintEnd_toEndOf="parent"

@@ -20,7 +20,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Welcome to DiseaseX"
+            android:text="@string/welcome_to_diseasex"
             android:gravity="center_horizontal"
             android:textSize="24sp"
             android:textColor="@android:color/black" />
@@ -36,7 +36,7 @@
             android:id="@+id/email_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
+            android:hint="@string/email"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -52,7 +52,7 @@
             android:id="@+id/phone_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Phone"
+            android:hint="@string/phone"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -74,14 +74,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:text="Cancel"
+                android:text="@string/cancel"
                 android:layout_marginRight="8dp"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/submit_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="SUBMIT"/>
+                android:text="@string/submit"/>
 
         </LinearLayout>
 

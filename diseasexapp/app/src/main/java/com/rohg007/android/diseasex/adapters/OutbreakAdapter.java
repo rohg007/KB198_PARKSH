@@ -1,5 +1,6 @@
 package com.rohg007.android.diseasex.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
@@ -106,6 +107,7 @@ public class OutbreakAdapter extends RecyclerView.Adapter<OutbreakAdapter.ViewHo
             googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         }
 
+        @SuppressLint("SetTextI18n")
         private void bindView(int pos){
             Outbreak item = outbreaks.get(pos);
             layout.setTag(this);
@@ -121,11 +123,11 @@ public class OutbreakAdapter extends RecyclerView.Adapter<OutbreakAdapter.ViewHo
             temp.setLongitude(item.getLatlng().longitude);
             float dist = currLocation.distanceTo(temp);
             dist/=1000;
-            distTextView.setText(Double.toString(Math.floor(dist)) + " Kms Away");
+            distTextView.setText(Math.floor(dist) + " "+"Kms Away");
             if(item.getFlag())
-                outbreakTypeTv.setText("Animal Outbreak");
+                outbreakTypeTv.setText(R.string.animal_outbreak);
             else
-                outbreakTypeTv.setText("Human Outbreak");
+                outbreakTypeTv.setText(R.string.human_outbreak);
         }
 
         private String getGeocodeLocation(LatLng location){

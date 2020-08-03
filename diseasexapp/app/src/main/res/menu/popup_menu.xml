@@ -2,6 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/update_notification_details"
-        android:title="Update Notification Details"
+        android:title="@string/update_notification_details"
         android:icon="@android:drawable/ic_notification_overlay"/>
 </menu>

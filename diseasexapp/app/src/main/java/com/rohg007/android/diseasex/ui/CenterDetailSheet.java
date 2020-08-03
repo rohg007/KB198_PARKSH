@@ -97,7 +97,7 @@ public class CenterDetailSheet extends BottomSheetDialogFragment {
         centerEmailTv.setText(outbreak.getHealthCenter().getEmail());
 
         if(outbreak.getFlag()){
-            precautionLivestockTv.setText("Livestocks Affected");
+            precautionLivestockTv.setText(R.string.livestock_affected);
             int n = outbreak.getDisease().getLivestock().size();
             String[] livestocks = new String[n];
             for(int i=0;i<n;i++)
@@ -111,7 +111,7 @@ public class CenterDetailSheet extends BottomSheetDialogFragment {
         }
 
         if(outbreak.getFlag()){
-            symptomsVaccinationTv.setText("Vaccinations");
+            symptomsVaccinationTv.setText(R.string.vaccinations);
             int n = outbreak.getDisease().getVaccine().size();
             String[] vaccines = new String[n];
             for(int i=0;i<n;i++)
