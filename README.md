@@ -16,6 +16,7 @@ If we can know beforehand and take measures on a small scale, maybe we can preve
    
    <img src="https://github.com/rohg007/KB198_PARKSH/blob/master/Screenshots/vaccine_notifications.png" alt="Vaccine Notification" width="200" height="320">
  </ol>
+ 
  ## How to Run
  
  React Web Dashboard is deployed on firebase cloud and can be directly accessed by visiting https://sihfinal-23cee.web.app/
