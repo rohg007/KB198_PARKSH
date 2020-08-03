@@ -21,7 +21,7 @@ import {
 import editImage from '../images/edit.png';
 
 var sectionStyle = {
-  backgroundColor: '#e0cda6',
+  backgroundColor: '#DEE4E7',
   width: '100%',
   height: '100vh',
   overflowY: 'auto',
@@ -255,7 +255,7 @@ function Human_Case() {
           }}
           className='d-flex align-items-center justify-content-center'
         >
-          <Loading />
+          <Loading loadingColor='#ff790e' />
         </div>
       ) : (
         <div className='p-3'>

@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import { Doughnut, Bar } from 'react-chartjs-2';
 import Loading from './loading/loading.jsx';
+import CheckedField from './switch/switchtoggler.jsx';
 import GetAllDiseases from '../api/diseases/getAllDiseases';
 import GetAllAnimalCases from '../api/animalCase/getAllAnimalCases';
 import GetAllHumanCases from '../api/humanCases/getAllhumanCase';
 // import GetAllHealthCenters from '../api/healthCenters/getAllhealthCenter';
 import GetAllOutbreaks from '../api/outBreaks/getAlloutbreaks';
 import ReportMap from './map.jsx';
-
+import im from '../images/functionality.jpeg';
+import './signup.css';
+import imm from '../images/hc2.jpg';
 var sectionStyle = {
-  backgroundColor: '#f2e6cb',
+  backgroundImage: `url(${imm})`,
   width: '100%',
   height: '100vh',
   overflowY: 'auto',
@@ -24,6 +27,7 @@ class Health_center extends Component {
     animalCases: [],
     humanCases: [],
     outbreaks: [],
+    language: false,
     // healthCenters: [],
     user: {},
     barChart: [],
@@ -114,7 +118,9 @@ class Health_center extends Component {
       this.setState({ overAllError: 'Server Error!' });
     }
   }
-
+  onChange = () => {
+    this.setState({ language: !this.state.language });
+  };
   render() {
     let user = JSON.parse(localStorage.getItem('user'));
     return (
@@ -126,7 +132,7 @@ class Health_center extends Component {
             }}
             className='d-flex align-items-center justify-content-center'
           >
-            <Loading />
+            <Loading loadingColor='#ff790e' />
           </div>
         ) : (
           <div className='p-3'>
@@ -146,17 +152,35 @@ class Health_center extends Component {
                 ''
               ) : (
                 <div className='container-fluid p-0'>
-                  <div className='row'>
+                  <div className='row' style={{ justifyContent: 'center' }}>
                     <div
                       style={{
                         height: '50%',
                         justifyContent: 'center',
+                        backgroundColor: 'white',
+                        margin: '2%',
                       }}
                       className='col-sm-6 pl-4'
                     >
+                      <CheckedField
+                        id='hideChecker'
+                        heading={
+                          !this.state.language
+                            ? 'Language Switching'
+                            : 'भाषा बदलें'
+                        }
+                        checked={this.state.language}
+                        onChange={() => {
+                          this.onChange();
+                        }}
+                      />
                       <Bar
                         data={{
-                          labels: ['Infected', 'Recovered', 'Deaths'],
+                          labels: [
+                            !this.state.language ? 'Infected' : 'संक्रमित',
+                            !this.state.language ? 'Recoverd' : 'बरामद',
+                            !this.state.language ? 'Deaths' : 'मृतक',
+                          ],
                           datasets: [
                             {
                               label: 'People',
@@ -180,7 +204,9 @@ class Health_center extends Component {
                           title: {
                             display: true,
                             position: 'top',
-                            text: `HEALTH CENTER : ${this.state.user.name} Status`,
+                            text: !this.state.language
+                              ? `HEALTH CENTER : ${this.state.user.name} Status`
+                              : 'स्वास्थ्य केंद्र: एस एम एस हॉस्पिटल स्थिति',
                             fontSize: '20',
                             fontColor: 'black',
                           },
@@ -195,11 +221,157 @@ class Health_center extends Component {
                 </div>
               )}
             </div>
+
+            <div className='container-fluid p-0'>
+              <div className='row p-4'>
+                <div
+                  className='zoomm'
+                  style={{
+                    backgroundImage: `url(${im})`,
+                    backgroundSize: '35%',
+                    backgroundRepeat: 'no-repeat',
+                  }}
+                >
+                  <h3
+                    style={{
+                      color: 'black',
+                      positionX: '50%',
+                      fontWeight: '5px',
+                    }}
+                  >
+                    {' '}
+                    {!this.state.language ? 'FUNCTIONALITIES' : 'कार्यक्षमताओं'}
+                  </h3>
+
+                  <div
+                    className='btn-group'
+                    role='group'
+                    aria-label='First group'
+                    style={{ height: '2%', marginLeft: '35%', Right: '0' }}
+                  >
+                    {user.email === 'admin@gmail.com' ? (
+                      <a
+                        className='btn btn-block btn-dark zoom px-2'
+                        href='/allhealthcenters'
+                        style={{ marginRight: '0.5rem', width: '20px' }}
+                      >
+                        <h6>
+                          {!this.state.language
+                            ? 'HEALTH CENTERS'
+                            : 'सारे स्वास्थ्य केंद्र'}
+                        </h6>
+                        <br></br>
+                        <p style={{ fontSize: '13px', textAlign: 'center' }}>
+                          {!this.state.language
+                            ? 'All the registered health center details'
+                            : 'सारे  स्वा्थ्य केंद्र मामलों की सूची'}
+                        </p>
+                        <p style={{ textAlign: 'right' }}>➜</p>
+                      </a>
+                    ) : (
+                      <a
+                        className='btn btn-large btn-dark zoom shadow'
+                        href='/new_humancase'
+                        style={{ marginRight: '0.5rem' }}
+                      >
+                        <h6>
+                          {!this.state.language
+                            ? 'NEW HUMAN CASE'
+                            : 'नया मानव मामला'}
+                        </h6>
+                        <br></br>
+                        <p>
+                          {!this.state.language
+                            ? 'Add details of new case for human registered in your health center'
+                            : 'आपके स्वा्थ्य केंद्र के नए मानव मामले का विवरण दर्ज करे'}
+                        </p>
+                        <p style={{ textAlign: 'right' }}>➜</p>
+                      </a>
+                    )}
+                    {this.state.user.email === 'admin@gmail.com' ? (
+                      ''
+                    ) : (
+                      <a
+                        className='btn btn-large btn-dark zoom shadow'
+                        href='/new_animalcase'
+                        style={{ marginRight: '0.5rem' }}
+                      >
+                        <h6>
+                          {!this.state.language
+                            ? 'NEW ANIMAL CASE'
+                            : 'नया जानवर मामला'}
+                        </h6>
+                        <br></br>
+                        <p>
+                          {!this.state.language
+                            ? '  Add details of new case for animal registered in your health center'
+                            : 'आपके स्वा्थ्य केंद्र के नए जानवर मामले का विवरण दर्ज करे'}
+                        </p>
+                        <p style={{ textAlign: 'right' }}>➜</p>
+                      </a>
+                    )}
+                    <a
+                      style={{ marginRight: '0.5rem' }}
+                      className='btn btn-large btn-dark zoom'
+                      href='/human_case'
+                    >
+                      <h6>
+                        {!this.state.language
+                          ? 'ALL HUMAN CASES'
+                          : 'सारे मानव मामलें'}
+                      </h6>
+                      <br></br>
+                      <p>
+                        {!this.state.language
+                          ? 'Find list of all the human cases added and can update the status'
+                          : 'सारे मानव मामलों की सूची या स्थिति बदले'}
+                      </p>
+                      <p style={{ textAlign: 'right' }}>➜</p>
+                    </a>
+                    <a
+                      className='btn btn-large btn-dark zoom'
+                      href='/animal_case'
+                      style={{ marginRight: '0.5rem' }}
+                    >
+                      <h6>
+                        {!this.state.language
+                          ? 'ALL HUMAN CASES'
+                          : 'सारे जानवर मामलें'}
+                      </h6>
+                      <br></br>
+                      <p>
+                        {!this.state.language
+                          ? ' Find list of all the animal cases added and can update the status'
+                          : 'सारे जानवर मामलों की सूची या स्थिति बदले'}
+                      </p>
+                      <p style={{ textAlign: 'right' }}>➜</p>
+                    </a>
+                    {user.email === 'admin@gmail.com' ? (
+                      <a className='btn btn-large btn-dark zoom' href='/admin'>
+                        <h6>
+                          {!this.state.language
+                            ? 'NOTIFY ALL'
+                            : 'सबको सूचित करें'}
+                        </h6>
+                        <br></br>
+                        <p>
+                          {!this.state.language
+                            ? 'Notifies all the patients at once for their respective vaccines'
+                            : 'सभी मरीजों को एक साथ उनके टीकाकरण के बारे में सूचित किया जाता हैं'}
+                        </p>
+                        <p style={{ textAlign: 'right' }}>➜</p>
+                      </a>
+                    ) : null}
+                  </div>
+                </div>
+              </div>
+            </div>
             <div className='row'>
               <div
                 style={{
                   height: '50%',
                   justifyContent: 'center',
+                  backgroundColor: 'white',
                 }}
                 className='col-sm-6 pl-4'
               >
@@ -230,6 +402,7 @@ class Health_center extends Component {
                 style={{
                   height: '50%',
                   justifyContent: 'center',
+                  backgroundColor: 'white',
                 }}
                 className='col-sm-6 pl-4'
               >
@@ -239,92 +412,87 @@ class Health_center extends Component {
                 />
               </div>
             </div>
-            <div className='container-fluid p-0'>
-              <div className='row p-4'>
-                <div
-                  className='btn-group pl-4'
-                  role='group'
-                  aria-label='First group'
-                  style={{ height: '2%' }}
-                >
-                  {user.email === 'admin@gmail.com' ? (
-                    <a
-                      className='btn btn-large btn-dark'
-                      href='/allhealthcenters'
-                    >
-                      HEALTH CENTERS
-                    </a>
-                  ) : (
-                    <a className='btn btn-large btn-dark' href='/new_humancase'>
-                      NEW HUMAN CASE
-                    </a>
-                  )}
-                  {user.email === 'admin@gmail.com' ? (
-                    ''
-                  ) : (
-                    <a
-                      className='btn btn-large btn-dark'
-                      href='/new_animalcase'
-                    >
-                      NEW ANIMAL CASE
-                    </a>
-                  )}
-
-                  <a className='btn btn-large btn-dark' href='/human_case'>
-                    HUMAN CASES
-                  </a>
-                  <a className='btn btn-large btn-dark' href='/animal_case'>
-                    ANIMAL CASES
-                  </a>
-                </div>
+            <div
+              className='row'
+              style={{
+                height: '3rem',
+                color: 'white',
+                textAlign: 'center !important',
+                marginTop: '2rem',
+                marginBottom: '1rem',
+              }}
+            >
+              <div
+                className='btn btn-large btn-dark'
+                style={{
+                  textAlign: 'center',
+                }}
+              >
+                <h2>{!this.state.language ? 'DISEASES' : 'रोगों'}</h2>
               </div>
             </div>
+
             <div className='container-fluid p-0'>
-              <div className='row'>
+              <div className='row' style={{ backgroundColor: '#DEE4E7' }}>
                 {' '}
                 {this.state.diseases.map((dise) => {
                   return (
                     <div className='col-md-3 col-sm-6' key={dise._id}>
-                      <div style={{ paddingTop: '3%' }}>
-                        <Doughnut
-                          data={{
-                            labels: ['Infected', 'Recoverd', 'Deaths'],
-                            datasets: [
-                              {
-                                label: 'Rainfall',
-                                backgroundColor: [
-                                  'rgba(0, 0, 255, 0.7)',
-                                  'rgba(0, 255, 0, 0.7)',
-                                  'rgba(255, 0, 0, 0.7)',
-                                ],
-                                hoverBackgroundColor: ['blue', 'green', 'red'],
-                                data: [
-                                  dise.total_affected,
-                                  dise.total_recovered,
-                                  dise.total_deaths,
-                                ],
+                      <div
+                        className='shadow-lg card mb-5'
+                        style={{ marginTop: '5%' }}
+                      >
+                        <div className='card-header'>
+                          <h6>{dise.name}</h6>
+                        </div>
+                        <div className='card-body'>
+                          <Doughnut
+                            data={{
+                              labels: [
+                                !this.state.language ? 'Infected' : 'संक्रमित',
+                                !this.state.language ? 'Recoverd' : 'बरामद',
+                                !this.state.language ? 'Deaths' : 'मृतक',
+                              ],
+                              datasets: [
+                                {
+                                  label: 'Rainfall',
+                                  backgroundColor: [
+                                    'rgba(0, 0, 255, 0.7)',
+                                    'rgba(0, 255, 0, 0.7)',
+                                    'rgba(255, 0, 0, 0.7)',
+                                  ],
+                                  hoverBackgroundColor: [
+                                    'blue',
+                                    'green',
+                                    'red',
+                                  ],
+                                  data: [
+                                    dise.total_affected,
+                                    dise.total_recovered,
+                                    dise.total_deaths,
+                                  ],
+                                },
+                              ],
+                            }}
+                            options={{
+                              title: {
+                                display: false,
+                                fontColor: 'black',
+                                fontSize: 15,
+                                position: 'top',
                               },
-                            ],
-                          }}
-                          options={{
-                            title: {
-                              display: true,
-                              text: dise.name,
-                              fontColor: 'black',
-                              fontSize: 15,
-                              position: 'top',
-                            },
-                            legend: {
-                              display: true,
-                              fontColor: 'black',
-                              fontSize: '2',
-                              position: 'right',
-                            },
-                            labels: {
-                              fontColor: 'black',
-                            },
-                          }}
-                        />{' '}
+                              legend: {
+                                display: true,
+                                fontColor: 'black',
+                                fontSize: '2',
+                                position: 'right',
+                              },
+                              labels: {
+                                fontColor: 'black',
+                              },
+                            }}
+                          />{' '}
+                        </div>
                       </div>
                     </div>
                   );

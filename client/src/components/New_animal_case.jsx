@@ -11,8 +11,9 @@ import addAnimalCase from '../api/animalCase/createAnimalCase.jsx';
 // Geocode.setLanguage('en');
 // Geocode.setRegion('in');
 // Geocode.enableDebug();
+import im from '../images/hc2.jpg';
 var sectionStyle = {
-  backgroundColor: '#e0cda6',
+  backgroundImage: `url(${im})`,
   width: '100%',
   height: '100vh',
   overflowY: 'auto',
@@ -335,433 +336,444 @@ function NewAnimalCase() {
               }}
               className='d-flex align-items-center justify-content-center'
             >
-              <Loading />
+              <Loading loadingColor='#ff790e' />
             </div>
           ) : (
-            <div
-              className='card '
-              body='true'
-              inverse='true'
-              style={{
-                marginLeft: '20%',
-                marginRight: '20%',
-                justifyContent: 'center',
-
-                backgroundColor: 'rgba(0,0,0,0.30)',
-                borderColor: '#333',
-              }}
-            >
-              <div className='card-header'>
-                <h3>New Animal Case</h3>
-              </div>
-              <form onSubmit={handleSubmit}>
-                <div className='card-body'>
-                  <div className='d-flex align-items-center'>
-                    <div className='flex-fill pr-3'>
-                      <div className='form-group '>
-                        <label htmlFor='name'>Owner Name</label>
-                        <input
-                          type='text'
-                          id='name'
-                          autoComplete='off'
-                          required
-                          className='form-control'
-                          onChange={(event) => {
-                            setOwnerName(event.target.value);
-                            setError((error) => ({ ...error, nameError: '' }));
-                          }}
-                          onBlur={() =>
-                            ownerName.length === 0
-                              ? setError((error) => ({
-                                  ...error,
-                                  nameError: 'Field cannot be empty',
-                                }))
-                              : null
-                          }
-                          placeholder='Enter Name of Owner'
-                        />
-                        {error.nameError ? (
-                          <div className='errorLabel'>
-                            <p className='p-0'>{error.nameError}</p>
-                          </div>
-                        ) : null}
+            <div className='d-flex align-items-center justify-content-center  pt-4'>
+              <div
+                className='card '
+                body='true'
+                inverse='true'
+                style={{
+                  backgroundColor: 'rgba(0,0,0,0.40)',
+                  borderColor: '#333',
+                }}
+              >
+                <div className='card-header'>
+                  <h3>New Animal Case</h3>
+                </div>
+                <form onSubmit={handleSubmit}>
+                  <div className='card-body'>
+                    <div className='d-flex align-items-center'>
+                      <div className='flex-fill pr-3'>
+                        <div className='form-group '>
+                          <label htmlFor='name'>Owner Name</label>
+                          <input
+                            type='text'
+                            id='name'
+                            autoComplete='off'
+                            required
+                            className='form-control'
+                            onChange={(event) => {
+                              setOwnerName(event.target.value);
+                              setError((error) => ({
+                                ...error,
+                                nameError: '',
+                              }));
+                            }}
+                            onBlur={() =>
+                              ownerName.length === 0
+                                ? setError((error) => ({
+                                    ...error,
+                                    nameError: 'Field cannot be empty',
+                                  }))
+                                : null
+                            }
+                            placeholder='Enter Name of Owner'
+                          />
+                          {error.nameError ? (
+                            <div className='errorLabel'>
+                              <p className='p-0'>{error.nameError}</p>
+                            </div>
+                          ) : null}
+                        </div>
+                      </div>
+                      <div className='flex-fill pr-3'>
+                        <div className='form-group'>
+                          <label htmlFor='email'>Email address</label>
+                          <input
+                            type='email'
+                            required
+                            id='email'
+                            autoComplete='off'
+                            className='form-control'
+                            placeholder='Enter Owner email'
+                            onChange={(event) => {
+                              setEmail(event.target.value);
+                              setError((error) => ({
+                                ...error,
+                                emailError: '',
+                              }));
+                            }}
+                            onBlur={() =>
+                              email.length === 0
+                                ? setError((error) => ({
+                                    ...error,
+                                    emailError: 'Enter a valid Email',
+                                  }))
+                                : null
+                            }
+                          />
+                          {error.emailError ? (
+                            <div className='errorLabel'>
+                              <p className='p-0'>{error.emailError}</p>
+                            </div>
+                          ) : null}
+                        </div>
+                      </div>
+                      <div className='flex-fill'>
+                        <div className='form-group'>
+                          <label htmlFor='contact'>Owner Contact</label>
+                          <input
+                            type='text'
+                            required
+                            id='contact'
+                            autoComplete='off'
+                            className='form-control'
+                            placeholder='Enter Owner Contact Number'
+                            onChange={(event) => {
+                              setContact(event.target.value);
+                              setError((error) => ({
+                                ...error,
+                                contactError: '',
+                              }));
+                            }}
+                            onBlur={() =>
+                              contact[0] === '0'
+                                ? setError((error) => ({
+                                    ...error,
+                                    contactError:
+                                      'please exclude zero from starting',
+                                  }))
+                                : contact.length > 10 || contact.length === 0
+                                ? setError((error) => ({
+                                    ...error,
+                                    contactError:
+                                      'Please enter a valid phone number',
+                                  }))
+                                : null
+                            }
+                          />
+                          {error.contactError ? (
+                            <div className='errorLabel'>
+                              <p className='p-0'>{error.contactError}</p>
+                            </div>
+                          ) : null}
+                        </div>
                       </div>
                     </div>
-                    <div className='flex-fill pr-3'>
-                      <div className='form-group'>
-                        <label htmlFor='email'>Email address</label>
-                        <input
-                          type='email'
-                          required
-                          id='email'
-                          autoComplete='off'
-                          className='form-control'
-                          placeholder='Enter Owner email'
-                          onChange={(event) => {
-                            setEmail(event.target.value);
-                            setError((error) => ({ ...error, emailError: '' }));
-                          }}
-                          onBlur={() =>
-                            email.length === 0
-                              ? setError((error) => ({
-                                  ...error,
-                                  emailError: 'Enter a valid Email',
-                                }))
-                              : null
-                          }
-                        />
-                        {error.emailError ? (
-                          <div className='errorLabel'>
-                            <p className='p-0'>{error.emailError}</p>
-                          </div>
-                        ) : null}
-                      </div>
-                    </div>
-                    <div className='flex-fill'>
-                      <div className='form-group'>
-                        <label htmlFor='contact'>Owner Contact</label>
+                    <div className='d-flex align-items-center justify-content-center'>
+                      <div className='form-group pr-3' style={{ width: '75%' }}>
+                        <label htmlFor='address'>Owner Address</label>
                         <input
                           type='text'
-                          required
-                          id='contact'
+                          id='address'
                           autoComplete='off'
                           className='form-control'
-                          placeholder='Enter Owner Contact Number'
+                          placeholder='Enter Owner Address'
                           onChange={(event) => {
-                            setContact(event.target.value);
+                            setAddress(event.target.value);
                             setError((error) => ({
                               ...error,
-                              contactError: '',
+                              addressError: '',
                             }));
                           }}
                           onBlur={() =>
-                            contact[0] === '0'
+                            address.length === 0
                               ? setError((error) => ({
                                   ...error,
-                                  contactError:
-                                    'please exclude zero from starting',
-                                }))
-                              : contact.length > 10 || contact.length === 0
-                              ? setError((error) => ({
-                                  ...error,
-                                  contactError:
-                                    'Please enter a valid phone number',
+                                  addressError: 'Please enter residential Info',
                                 }))
                               : null
                           }
-                        />
-                        {error.contactError ? (
+                        />{' '}
+                        {error.addressError ? (
                           <div className='errorLabel'>
-                            <p className='p-0'>{error.contactError}</p>
+                            <p className='p-0'>{error.addressError}</p>
                           </div>
                         ) : null}
                       </div>
-                    </div>
-                  </div>
-                  <div className='d-flex align-items-center justify-content-center'>
-                    <div className='form-group pr-3' style={{ width: '75%' }}>
-                      <label htmlFor='address'>Owner Address</label>
-                      <input
-                        type='text'
-                        id='address'
-                        autoComplete='off'
-                        className='form-control'
-                        placeholder='Enter Owner Address'
-                        onChange={(event) => {
-                          setAddress(event.target.value);
-                          setError((error) => ({
-                            ...error,
-                            addressError: '',
-                          }));
-                        }}
-                        onBlur={() =>
-                          address.length === 0
-                            ? setError((error) => ({
-                                ...error,
-                                addressError: 'Please enter residential Info',
-                              }))
-                            : null
-                        }
-                      />{' '}
-                      {error.addressError ? (
-                        <div className='errorLabel'>
-                          <p className='p-0'>{error.addressError}</p>
-                        </div>
-                      ) : null}
-                    </div>
 
-                    <div className='form-group'>
-                      <label htmlFor='pinCode'>Pin Code</label>
-                      <input
-                        type='text'
-                        id='pinCode'
-                        autoComplete='off'
-                        className='form-control'
-                        placeholder='PinCode'
-                        onChange={(event) => {
-                          setPinCode(event.target.value);
-                          setError((error) => ({
-                            ...error,
-                            pinCodeError: '',
-                          }));
-                        }}
-                        onBlur={() =>
-                          pinCode.length === 0
-                            ? setError((error) => ({
-                                ...error,
-                                pinCodeError: 'Please enter a valid PinCode',
-                              }))
-                            : null
-                        }
-                      />
-                      {error.pinCodeError ? (
-                        <div className='errorLabel'>
-                          <p className='p-0'>{error.pinCodeError}</p>
-                        </div>
-                      ) : null}
-                    </div>
-                  </div>
-                  <div className='d-flex align-items-center'>
-                    <div className=' pr-3' style={{ width: '38%' }}>
-                      <div className='form-group '>
-                        <label htmlFor='breed'>Animal Breed</label>
+                      <div className='form-group'>
+                        <label htmlFor='pinCode'>Pin Code</label>
                         <input
                           type='text'
-                          id='breed'
+                          id='pinCode'
                           autoComplete='off'
-                          required
                           className='form-control'
+                          placeholder='PinCode'
                           onChange={(event) => {
-                            setBreed(event.target.value);
-                            setError((error) => ({ ...error, breedError: '' }));
+                            setPinCode(event.target.value);
+                            setError((error) => ({
+                              ...error,
+                              pinCodeError: '',
+                            }));
                           }}
                           onBlur={() =>
-                            breed.length === 0
+                            pinCode.length === 0
                               ? setError((error) => ({
                                   ...error,
-                                  breedError: 'Field cannot be empty',
+                                  pinCodeError: 'Please enter a valid PinCode',
                                 }))
                               : null
                           }
-                          placeholder='Enter Animal Breed'
                         />
-                        {error.breedError ? (
+                        {error.pinCodeError ? (
                           <div className='errorLabel'>
-                            <p className='p-0'>{error.breedError}</p>
+                            <p className='p-0'>{error.pinCodeError}</p>
                           </div>
                         ) : null}
                       </div>
                     </div>
-                    <div className='pr-3 pb-3' style={{ width: '38%' }}>
-                      <Dropdown
-                        label='Disease'
-                        hasError={error.diseaseError}
-                        categories={diseases.map((val) => val.name)}
-                        selectedItem={(item) => {
-                          setDisease(item);
-                          setError((error) => ({
-                            ...error,
-                            diseaseError: '',
-                          }));
-                        }}
-                      />
-                      {error.diseaseError ? (
-                        <div className='errorLabel'>
-                          <p className='p-0'>{error.diseaseError}</p>
-                        </div>
-                      ) : null}
-                    </div>
-                    <div className='pb-3' style={{ width: '24%' }}>
-                      <Dropdown
-                        label='Status'
-                        hasError={error.statusError}
-                        categories={statuses}
-                        selectedItem={(item) => {
-                          setStatus(item);
-                          setError((error) => ({
-                            ...error,
-                            statusError: '',
-                          }));
-                        }}
-                      />
-                      {error.statusError ? (
-                        <div className='errorLabel'>
-                          <p className='p-0'>{error.statusError}</p>
-                        </div>
-                      ) : null}
-                    </div>
-                  </div>
-                  {disease === 'Other' ? (
-                    <div>
-                      <div className='d-flex align-items-center'>
-                        <div
-                          className='form-group pr-3'
-                          style={{ width: '50%' }}
-                        >
-                          <label htmlFor='DiseaseName'>Disease Name</label>
+                    <div className='d-flex align-items-center'>
+                      <div className=' pr-3' style={{ width: '38%' }}>
+                        <div className='form-group '>
+                          <label htmlFor='breed'>Animal Breed</label>
                           <input
                             type='text'
-                            id='DiseaseName'
+                            id='breed'
                             autoComplete='off'
                             required
                             className='form-control'
-                            placeholder='Enter the disease of Patient'
                             onChange={(event) => {
-                              setDiseaseName(event.target.value);
+                              setBreed(event.target.value);
                               setError((error) => ({
                                 ...error,
-                                diseaseNameError: '',
+                                breedError: '',
                               }));
                             }}
                             onBlur={() =>
-                              diseaseName.length === 0
+                              breed.length === 0
                                 ? setError((error) => ({
                                     ...error,
-                                    diseaseNameError:
-                                      'Please enter the disease of the Registering Case!',
+                                    breedError: 'Field cannot be empty',
                                   }))
                                 : null
                             }
+                            placeholder='Enter Animal Breed'
                           />
-                          {error.diseaseNameError ? (
+                          {error.breedError ? (
                             <div className='errorLabel'>
-                              <p className='p-0'>{error.diseaseNameError}</p>
-                            </div>
-                          ) : null}
-                        </div>
-                        <div className='form-group' style={{ width: '50%' }}>
-                          <label htmlFor='symptoms'>Symptoms</label>
-                          <input
-                            type='text'
-                            id='symptoms'
-                            autoComplete='off'
-                            required
-                            className='form-control'
-                            placeholder='Add coma seperated list of symptoms'
-                            onChange={(event) => {
-                              setSymptoms(event.target.value);
-                              setError((error) => ({
-                                ...error,
-                                symptomsError: '',
-                              }));
-                            }}
-                            onBlur={() =>
-                              symptoms.length === 0
-                                ? setError((error) => ({
-                                    ...error,
-                                    symptomsError:
-                                      'Atleast one symptom should be added!',
-                                  }))
-                                : null
-                            }
-                          />
-                          {error.symptomsError ? (
-                            <div className='errorLabel'>
-                              <p className='p-0'>{error.symptomsError}</p>
+                              <p className='p-0'>{error.breedError}</p>
                             </div>
                           ) : null}
                         </div>
                       </div>
-                      <div className='d-flex align-items-center justify-content-center'>
-                        <div
-                          className='form-group pr-3'
-                          style={{ width: '75%' }}
-                        >
-                          <label htmlFor='vaccines'>Vaccines</label>
-                          <input
-                            type='text'
-                            id='vaccines'
-                            autoComplete='off'
-                            className='form-control'
-                            placeholder='Enter any Vaccine for the disease!'
-                            onChange={(event) => {
-                              setVaccines(event.target.value);
-                              setError((error) => ({
-                                ...error,
-                                vaccinesError: '',
-                              }));
-                            }}
-                            onBlur={() =>
-                              vaccines.length === 0
-                                ? setError((error) => ({
-                                    ...error,
-                                    vaccinesError: 'Cannot be empty',
-                                  }))
-                                : null
-                            }
-                          />
-                          {error.vaccinesError ? (
-                            <div className='errorLabel'>
-                              <p className='p-0'>{error.vaccinesError}</p>
-                            </div>
-                          ) : null}
-                        </div>
-                        <div className='form-group'>
-                          <label htmlFor='duration'>Duration</label>
-                          <input
-                            type='number'
-                            id='duration'
-                            min={0}
-                            autoComplete='off'
-                            className='form-control'
-                            placeholder='Enter Duration in Days'
-                            onChange={(event) => {
-                              setDuration(event.target.value);
-                              setError((error) => ({
-                                ...error,
-                                durationError: '',
-                              }));
-                            }}
-                            onBlur={() =>
-                              duration.length === 0 || duration === 0
-                                ? setError((error) => ({
-                                    ...error,
-                                    durationError:
-                                      'Please enter a non-zero value!',
-                                  }))
-                                : null
-                            }
-                          />
-                          {error.durationError ? (
-                            <div className='errorLabel'>
-                              <p className='p-0'>{error.durationError}</p>
-                            </div>
-                          ) : null}
-                        </div>
+                      <div className='pr-3 pb-3' style={{ width: '38%' }}>
+                        <Dropdown
+                          label='Disease'
+                          hasError={error.diseaseError}
+                          categories={diseases.map((val) => val.name)}
+                          selectedItem={(item) => {
+                            setDisease(item);
+                            setError((error) => ({
+                              ...error,
+                              diseaseError: '',
+                            }));
+                          }}
+                        />
+                        {error.diseaseError ? (
+                          <div className='errorLabel'>
+                            <p className='p-0'>{error.diseaseError}</p>
+                          </div>
+                        ) : null}
+                      </div>
+                      <div className='pb-3' style={{ width: '24%' }}>
+                        <Dropdown
+                          label='Status'
+                          hasError={error.statusError}
+                          categories={statuses}
+                          selectedItem={(item) => {
+                            setStatus(item);
+                            setError((error) => ({
+                              ...error,
+                              statusError: '',
+                            }));
+                          }}
+                        />
+                        {error.statusError ? (
+                          <div className='errorLabel'>
+                            <p className='p-0'>{error.statusError}</p>
+                          </div>
+                        ) : null}
                       </div>
                     </div>
-                  ) : null}
-                </div>
+                    {disease === 'Other' ? (
+                      <div>
+                        <div className='d-flex align-items-center'>
+                          <div
+                            className='form-group pr-3'
+                            style={{ width: '50%' }}
+                          >
+                            <label htmlFor='DiseaseName'>Disease Name</label>
+                            <input
+                              type='text'
+                              id='DiseaseName'
+                              autoComplete='off'
+                              required
+                              className='form-control'
+                              placeholder='Enter the disease of Patient'
+                              onChange={(event) => {
+                                setDiseaseName(event.target.value);
+                                setError((error) => ({
+                                  ...error,
+                                  diseaseNameError: '',
+                                }));
+                              }}
+                              onBlur={() =>
+                                diseaseName.length === 0
+                                  ? setError((error) => ({
+                                      ...error,
+                                      diseaseNameError:
+                                        'Please enter the disease of the Registering Case!',
+                                    }))
+                                  : null
+                              }
+                            />
+                            {error.diseaseNameError ? (
+                              <div className='errorLabel'>
+                                <p className='p-0'>{error.diseaseNameError}</p>
+                              </div>
+                            ) : null}
+                          </div>
+                          <div className='form-group' style={{ width: '50%' }}>
+                            <label htmlFor='symptoms'>Symptoms</label>
+                            <input
+                              type='text'
+                              id='symptoms'
+                              autoComplete='off'
+                              required
+                              className='form-control'
+                              placeholder='Add coma seperated list of symptoms'
+                              onChange={(event) => {
+                                setSymptoms(event.target.value);
+                                setError((error) => ({
+                                  ...error,
+                                  symptomsError: '',
+                                }));
+                              }}
+                              onBlur={() =>
+                                symptoms.length === 0
+                                  ? setError((error) => ({
+                                      ...error,
+                                      symptomsError:
+                                        'Atleast one symptom should be added!',
+                                    }))
+                                  : null
+                              }
+                            />
+                            {error.symptomsError ? (
+                              <div className='errorLabel'>
+                                <p className='p-0'>{error.symptomsError}</p>
+                              </div>
+                            ) : null}
+                          </div>
+                        </div>
+                        <div className='d-flex align-items-center justify-content-center'>
+                          <div
+                            className='form-group pr-3'
+                            style={{ width: '75%' }}
+                          >
+                            <label htmlFor='vaccines'>Vaccines</label>
+                            <input
+                              type='text'
+                              id='vaccines'
+                              autoComplete='off'
+                              className='form-control'
+                              placeholder='Enter any Vaccine for the disease!'
+                              onChange={(event) => {
+                                setVaccines(event.target.value);
+                                setError((error) => ({
+                                  ...error,
+                                  vaccinesError: '',
+                                }));
+                              }}
+                              onBlur={() =>
+                                vaccines.length === 0
+                                  ? setError((error) => ({
+                                      ...error,
+                                      vaccinesError: 'Cannot be empty',
+                                    }))
+                                  : null
+                              }
+                            />
+                            {error.vaccinesError ? (
+                              <div className='errorLabel'>
+                                <p className='p-0'>{error.vaccinesError}</p>
+                              </div>
+                            ) : null}
+                          </div>
+                          <div className='form-group'>
+                            <label htmlFor='duration'>Duration</label>
+                            <input
+                              type='number'
+                              id='duration'
+                              min={0}
+                              autoComplete='off'
+                              className='form-control'
+                              placeholder='Enter Duration in Days'
+                              onChange={(event) => {
+                                setDuration(event.target.value);
+                                setError((error) => ({
+                                  ...error,
+                                  durationError: '',
+                                }));
+                              }}
+                              onBlur={() =>
+                                duration.length === 0 || duration === 0
+                                  ? setError((error) => ({
+                                      ...error,
+                                      durationError:
+                                        'Please enter a non-zero value!',
+                                    }))
+                                  : null
+                              }
+                            />
+                            {error.durationError ? (
+                              <div className='errorLabel'>
+                                <p className='p-0'>{error.durationError}</p>
+                              </div>
+                            ) : null}
+                          </div>
+                        </div>
+                      </div>
+                    ) : null}
+                  </div>
 
-                <div className='card-footer d-flex align-items-center flex-column'>
-                  {error.overAllError ? (
-                    <div className=' float-left errorLabel'>
-                      <p className='p-0 '>{error.overAllError}</p>
+                  <div className='card-footer d-flex align-items-center flex-column'>
+                    {error.overAllError ? (
+                      <div className=' float-left errorLabel'>
+                        <p className='p-0 '>{error.overAllError}</p>
+                      </div>
+                    ) : null}
+                    <div className='ml-auto'>
+                      <button
+                        type='submit'
+                        width='150px'
+                        className='btn btn-primary btn-block'
+                      >
+                        Register
+                      </button>
                     </div>
-                  ) : null}
-                  <div className='ml-auto'>
-                    <button
-                      type='submit'
-                      width='150px'
-                      className='btn btn-primary btn-block'
-                    >
-                      Register
-                    </button>
-                  </div>
 
-                  <div className='ml-auto'>
-                    <p className='forgot-password text-right'>
-                      <a style={{ color: 'black' }} href='/animal_case'>
-                        All Cases?{' '}
-                      </a>
+                    <div className='ml-auto'>
+                      <p className='forgot-password text-right'>
+                        <span>
+                          <a style={{ color: 'black' }} href='/animal_case'>
+                            All Cases?{' '}
+                          </a>
+                        </span>
 
-                      <a style={{ color: 'black' }} href='/new_humancase'>
-                        Add Human Case?
-                      </a>
-                    </p>
+                        <span>
+                          <a style={{ color: 'black' }} href='/new_humancase'>
+                            Add Human Case?
+                          </a>
+                        </span>
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </form>
+                </form>
+              </div>
             </div>
           )}
         </div>

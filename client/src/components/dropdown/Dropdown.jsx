@@ -21,7 +21,7 @@ function Dropdown({ label, categories, selectedItem, hasError }) {
               hasError ? 'errorDropdown' : 'dropdownVal'
             } shadow-none`}
           >
-            {labelCategory ? labelCategory : 'Select an Option'}
+            {labelCategory ? labelCategory : 'Select'}
 
             <div className='float-right'>
               <ArrowDown color='#90a8be' />
