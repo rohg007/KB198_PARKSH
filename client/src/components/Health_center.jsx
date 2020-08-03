@@ -5,7 +5,6 @@ import CheckedField from './switch/switchtoggler.jsx';
 import GetAllDiseases from '../api/diseases/getAllDiseases';
 import GetAllAnimalCases from '../api/animalCase/getAllAnimalCases';
 import GetAllHumanCases from '../api/humanCases/getAllhumanCase';
-// import GetAllHealthCenters from '../api/healthCenters/getAllhealthCenter';
 import GetAllOutbreaks from '../api/outBreaks/getAlloutbreaks';
 import ReportMap from './map.jsx';
 import im from '../images/functionality.jpeg';
@@ -28,7 +27,6 @@ class Health_center extends Component {
     humanCases: [],
     outbreaks: [],
     language: false,
-    // healthCenters: [],
     user: {},
     barChart: [],
     overAllError: '',
@@ -56,18 +54,6 @@ class Health_center extends Component {
                       this.setState({ loading: false });
                     });
                   if (user.email === 'admin@gmail.com') {
-                    // GetAllHealthCenters()
-                    //   .then((responses) => {
-                    //     this.setState({
-                    //       healthCenters: responses.data,
-                    //       overAllError: '',
-                    //     });
-                    //   })
-                    //   .catch((err) => {
-                    //     this.setState({ overAllError: "Can't able to fetch!" });
-                    //     this.setState({ loading: false });
-                    //   });
-
                     this.setState({
                       humanCases: responses.data,
                       overAllError: '',
@@ -380,23 +366,6 @@ class Health_center extends Component {
                   list={this.state.animalCases}
                   list1={this.state.humanCases}
                 />
-
-                {/* {this.state.user.email === 'admin@gmail.com' ? (
-                  <div className='row'>
-                    <div
-                      className='col-sm-12 pt-1'
-                      style={{
-                        height: '50%',
-                        justifyContent: 'center',
-                      }}
-                    >
-                      <ReportMap
-                        type='healthcenters'
-                        list={this.state.healthcenters}
-                      />
-                    </div>
-                  </div>
-                ) : null} */}
               </div>
               <div
                 style={{

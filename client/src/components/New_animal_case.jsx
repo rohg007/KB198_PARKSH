@@ -6,11 +6,6 @@ import Dropdown from './dropdown/Dropdown.jsx';
 import UpdateHealthCenter from '../api/healthCenters/updatehealthCenter.jsx';
 import addDisease from '../api/diseases/postDisease.jsx';
 import addAnimalCase from '../api/animalCase/createAnimalCase.jsx';
-// import Geocode from 'react-geocode';
-// Geocode.setApiKey('AIzaSyAlmuRLyMRm69-3f4TprA3MWAX5IJm1CT8');
-// Geocode.setLanguage('en');
-// Geocode.setRegion('in');
-// Geocode.enableDebug();
 import im from '../images/hc2.jpg';
 var sectionStyle = {
   backgroundImage: `url(${im})`,
@@ -96,15 +91,7 @@ function NewAnimalCase() {
       }));
       return;
     }
-    // Geocode.fromAddress(address).then(
-    //   (response) => {
-    //     const { lat, lng } = response.results[0].geometry.location;
-    //     console.log(lat, lng);
-    //   },
-    //   (error) => {
-    //     console.error(error);
-    //   }
-    // );
+
     if (disease === 'Other') {
       if (!diseaseName || !symptoms || !vaccines || !duration) {
         setError((error) => ({

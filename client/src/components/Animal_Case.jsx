@@ -307,7 +307,7 @@ function Animal_Case() {
             >
               Animal Cases
             </div>
-            {/* <Maps list={animalCases} /> */}
+
             {localStorage.user ? (
               <table className='table table-striped table-active'>
                 <thead>

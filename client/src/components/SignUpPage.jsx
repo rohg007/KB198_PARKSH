@@ -1,7 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import SignUp from '../api/auth/signUpApi.jsx';
-// import Map from "./maps.jsx";
 import Loading from './loading/loading.jsx';
 import './signup.css';
 
@@ -338,16 +337,7 @@ function SignUpPage() {
                       </div>
                     </div>
                   </div>
-                  {/* <div className='d-flex align-items-center justify-content-center'>
-                    <div style={{ margin: '100px' }}>
-                      <Map
-                        google={this.props.google}
-                        center={{ lat: 26.92207, lng: 75.778885 }}
-                        height='300px'
-                        zoom={15}
-                      />
-                    </div>
-                  </div> */}
+
                   <div className='d-flex align-items-center justify-content-center'>
                     <div className='flex-fill pr-3'>
                       <div className='form-group'>
