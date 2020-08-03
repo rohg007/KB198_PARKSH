@@ -70,13 +70,6 @@ public class OutbreakDetailActivity extends AppCompatActivity implements OnMapRe
         precautionsVaccinationTv = findViewById(R.id.precautionsVaccineTv);
         TextView distTv = findViewById(R.id.cur_dist_tv);
 
-        Location temp = new Location(LocationManager.GPS_PROVIDER);
-        temp.setLatitude(healthCenter.getLatlng().latitude);
-        temp.setLongitude(healthCenter.getLatlng().longitude);
-        float dist = currLocation.distanceTo(temp);
-        dist/=1000;
-        holder.distTextView.setText(Math.floor(dist) + " "+"Kms Away");
-
         centerNameContent.setTextSize(16);
         symptomsTv.setTextSize(16);
         precautionsTv.setTextSize(16);
