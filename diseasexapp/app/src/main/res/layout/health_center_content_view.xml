@@ -158,7 +158,7 @@
         android:layout_margin="16dp"
         android:background="@color/colorPrimary"
         android:text="@string/web"
-        android:textColor="@android:color/white"/>
+        style="@style/Widget.Diseasex.Button.OutlinedButton"/>
 
     <Button
         android:id="@+id/call_content_button"
@@ -168,7 +168,7 @@
         android:layout_marginTop="16dp"
         android:background="@color/colorPrimary"
         android:text="@string/call"
-        android:textColor="@android:color/white"
+        style="@style/Widget.Diseasex.Button.OutlinedButton"
         app:layout_constraintLeft_toRightOf="@id/check_web_content_button"
         app:layout_constraintRight_toLeftOf="@id/email_content_button"
         app:layout_constraintTop_toBottomOf="@id/deaths_content_tv" />
@@ -181,9 +181,16 @@
         android:layout_marginTop="16dp"
         android:background="@color/colorPrimary"
         android:text="@string/email"
-        android:textColor="@android:color/white"
         app:layout_constraintLeft_toRightOf="@id/call_content_button"
+        style="@style/Widget.Diseasex.Button.OutlinedButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/recovered_content_tv" />
 
+    <Button
+        android:id="@+id/locate_on_map"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="@string/locate_on_map"
+        app:layout_constraintTop_toBottomOf="@id/check_web_content_button"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

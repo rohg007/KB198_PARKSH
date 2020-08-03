@@ -74,6 +74,15 @@ public class HealthCenterAdapter extends RecyclerView.Adapter<HealthCenterAdapte
                 Intent i = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:"+healthCenter.getEmail()));
                 context.startActivity(i);
             });
+
+            holder.locateMapButton.setOnClickListener(v->{
+//                String uri = "geo:"+currLocation.getLatitude()+","+currLocation.getLongitude()+"?q=hospitals";
+                String uri = "geo:"+healthCenter.getLatlng().latitude+","+healthCenter.getLatlng().longitude;
+                Uri gmmIntentUri = Uri.parse(uri);
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                context.startActivity(mapIntent);
+            });
         }
     }
 
@@ -93,6 +102,7 @@ public class HealthCenterAdapter extends RecyclerView.Adapter<HealthCenterAdapte
         Button webContentButton;
         Button phoneContentButton;
         Button emailContentButton;
+        Button locateMapButton;
         TextView distTextView;
 
         public HealthCenterViewHolder(@NonNull View itemView) {
@@ -107,6 +117,7 @@ public class HealthCenterAdapter extends RecyclerView.Adapter<HealthCenterAdapte
             phoneContentButton = itemView.findViewById(R.id.call_content_button);
             emailContentButton = itemView.findViewById(R.id.email_content_button);
             distTextView = itemView.findViewById(R.id.cur_dist_tv);
+            locateMapButton = itemView.findViewById(R.id.locate_on_map);
         }
     }
 }

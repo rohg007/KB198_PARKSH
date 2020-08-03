@@ -24,4 +24,9 @@
         android:icon="@android:drawable/ic_delete"
         android:title="@string/menu_diagnosis"/>
 
+    <item
+        android:id="@+id/view_past_outbreaks"
+        android:icon="@android:drawable/ic_menu_view"
+        android:title="@string/view_past_outbreaks"/>
+
 </menu>

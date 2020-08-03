@@ -72,4 +72,9 @@
     <string name="outbreak_area">Outbreak Area</string>
     <string name="call_health_center">CALL HEALTH CENTER</string>
     <string name="associated_health_center">Associated Health Center</string>
+    <string name="past_outbreaks">Past Outbreaks</string>
+    <string name="view_past_outbreaks">View Past Outbreaks</string>
+    <string name="locate_on_map">Locate on map</string>
+    <string name="nearest_health_centers">Nearest Health Centers</string>
+    <string name="locate_nearest">Locate Nearest</string>
 </resources>

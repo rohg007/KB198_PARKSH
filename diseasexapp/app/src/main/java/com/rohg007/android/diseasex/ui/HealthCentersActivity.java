@@ -7,13 +7,16 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.ramotion.foldingcell.FoldingCell;
 import com.rohg007.android.diseasex.R;
 import com.rohg007.android.diseasex.adapters.HealthCenterAdapter;
@@ -53,6 +56,27 @@ public class HealthCentersActivity extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         healthCenterAdapter = new HealthCenterAdapter(this, healthCenterArrayList, location);
         recyclerView.setAdapter(healthCenterAdapter);
+
+
+        ExtendedFloatingActionButton fab = findViewById(R.id.nearest_health_centers);
+        fab.setOnClickListener(v -> {
+            String uri = "geo:"+location.getLatitude()+","+location.getLongitude()+"?q=hospitals";
+//            String uri = "geo:"+healthCenter.getLatlng().latitude+","+healthCenter.getLatlng().longitude;
+            Uri gmmIntentUri = Uri.parse(uri);
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+            mapIntent.setPackage("com.google.android.apps.maps");
+            startActivity(mapIntent);
+        });
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener(){
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy){
+                if (dy > 0)
+                    fab.shrink();
+                else if (dy < 0)
+                    fab.extend();
+            }
+        });
 
         healthCenterViewModel.getDiseaseRepository().observe(this, responseData ->{
             TreeMap<Double, HealthCenter> map = getSortedList(location, responseData);

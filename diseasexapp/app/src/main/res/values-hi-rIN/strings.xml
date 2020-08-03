@@ -69,4 +69,10 @@
     <string name="center_name">केंद्र का नाम:</string>
     <string name="outbreak_area">प्रकोप क्षेत्र</string>
     <string name="call_health_center">कॉल स्वास्थ्य केंद्र</string>
+    <string name="associated_health_center">" संबद्ध स्वास्थ्य केंद्र"</string>
+    <string name="past_outbreaks">अतीत का प्रकोप</string>
+    <string name="view_past_outbreaks">" विगत का प्रकोप देखें"</string>
+    <string name="locate_on_map">नक्शे पर पता लगाएँ</string>
+    <string name="nearest_health_centers">निकटतम स्वास्थ्य केंद्र</string>
+    <string name="locate_nearest">निकटतम का पता लगाएँ</string>
 </resources>

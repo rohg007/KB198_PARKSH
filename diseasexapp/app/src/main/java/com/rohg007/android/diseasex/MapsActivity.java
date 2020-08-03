@@ -67,6 +67,7 @@ import com.rohg007.android.diseasex.ui.DiseasesActivity;
 import com.rohg007.android.diseasex.ui.HealthCentersActivity;
 import com.rohg007.android.diseasex.ui.OubreaksActivity;
 import com.rohg007.android.diseasex.ui.PackInitialData;
+import com.rohg007.android.diseasex.ui.PastOutbreaksActivity;
 import com.rohg007.android.diseasex.ui.StartupFragment;
 import com.rohg007.android.diseasex.ui.UserEntryDialogFragment;
 import com.rohg007.android.diseasex.utils.Constants;
@@ -159,6 +160,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 return true;
             } else if(actionItem.getId() == R.id.diagnose_self){
                 getSupportFragmentManager().beginTransaction().add(new DiagnosisQuestionFragment(diseases), DiagnosisQuestionFragment.TAG).commit();
+            } else if(actionItem.getId() == R.id.view_past_outbreaks){
+                Intent intent = new Intent(MapsActivity.this, PastOutbreaksActivity.class);
+                intent.putExtra("LOCATION", lastLocation);
+                startActivity(intent);
             }
             return false;
         });
