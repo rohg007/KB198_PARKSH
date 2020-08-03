@@ -12,7 +12,7 @@ If we can know beforehand and take measures on a small scale, maybe we can preve
 <ol> 
   <li>Human and Animal Outbreaks</li>
   
-<img src="https://github.com/rohg007/KB198_PARKSH/tree/master/Screenshots/outbreak_circles.png" alt="Login Screen" width="200" height="320">
+<img src="https://github.com/rohg007/KB198_PARKSH/blob/master/Screenshots/outbreak%20circles.png" alt="Outbreak Circles" width="200" height="320"> <img src="https://github.com/rohg007/KB198_PARKSH/blob/master/Screenshots/animal_outbreak_detail.png" alt="Outbreak Circles" width="200" height="320"> 
 
 The blue circles represent animal outbreak regions here and orange circles represent human outbreak regions here. We process the data entering our databases on server side and identify outbreak regions using machine learning techniques.
 
